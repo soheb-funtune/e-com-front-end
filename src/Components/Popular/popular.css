@@ -1,0 +1,14 @@
+.popular {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  height: 90vh;
+}
+
+.popular-items {
+  margin-top: 20px;
+  display: flex;
+  /* flex-wrap: wrap; */
+  gap: 20px;
+}
