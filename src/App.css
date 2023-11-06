@@ -4,6 +4,11 @@
   /* margin: 0 auto;
   padding: 2rem; */
   text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  overflow: hidden;
 }
 @media (min-width: 993px) {
   #root {

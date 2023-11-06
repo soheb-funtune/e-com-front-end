@@ -1,5 +1,11 @@
 .item {
-  width: 350px;
+  width: 25%;
+}
+.item-width {
+  width: 100%;
+}
+.item img {
+  width: 100%;
 }
 .item:hover {
   transform: scale(1.05);
@@ -7,6 +13,7 @@
 }
 .item p {
   margin: 6px 0px;
+  text-align: left;
 }
 
 .item-prices {
