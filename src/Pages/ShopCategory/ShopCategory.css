@@ -23,9 +23,9 @@
 .shpcategory-indexsort {
   font-size: 14px;
 }
-.drop-icon img {
+.drop-icon {
   width: 13px;
-  height: 7px;
+  height: 10px;
 }
 
 .shopcategory-products {
@@ -33,6 +33,24 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
   padding: 0px 30px;
+}
+
+.shopcategory-loadmore {
+  border-radius: 50px;
+  margin-top: 50px;
+  padding: 10px 30px;
+  color: #747070;
+  border: 1px solid #747070;
+}
+
+.shopcategory-loadmore:active {
+  border: 1px solid gray;
+}
+.shopcategory-loadmore:focus-visible,
+.shopcategory-loadmore:focus,
+.shopcategory-loadmore:hover {
+  outline: none;
+  border: 1px solid gray;
 }
 
 @media (max-width: 767px) {

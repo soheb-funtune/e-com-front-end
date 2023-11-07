@@ -22,7 +22,7 @@ const ShopCategory = ({ banner, category }) => {
           <img
             className="drop-icon"
             src={dropdown_icon}
-            style={{ width: "20px", height: "20px" }}
+            style={{ width: "13px", height: "10px" }}
             alt="dropdown_icon"
           />
         </div>
@@ -44,6 +44,7 @@ const ShopCategory = ({ banner, category }) => {
           }
         })}
       </div>
+      <button className="shopcategory-loadmore">Explore More</button>
     </div>
   );
 };
