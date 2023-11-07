@@ -54,8 +54,10 @@
   gap: 45px;
 }
 .nav-login-cart button {
-  width: 157px;
-  height: 58px;
+  padding: 5px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   outline: none;
   border: 1px solid #7a7a7a;
   border-radius: 75px;
@@ -64,6 +66,7 @@
   font-weight: 500;
   background: white;
   cursor: pointer;
+  text-decoration: none;
 }
 .nav-login-cart button:active {
   background: #f3f3f3;
@@ -86,4 +89,7 @@
 .navbar a {
   text-decoration: none;
   color: inherit;
+}
+.navbar a:hover {
+  color: #515151;
 }
