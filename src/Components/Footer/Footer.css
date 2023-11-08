@@ -24,6 +24,7 @@
   list-style: none;
   gap: 20px;
   color: #252525;
+  flex-wrap: wrap;
 }
 .footer-links li {
   cursor: pointer;

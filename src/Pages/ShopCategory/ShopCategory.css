@@ -57,6 +57,18 @@
   .shopcategory-products {
     grid-template-columns: 1fr 1fr;
   }
+
+  .shopcategory-sort {
+    padding: 0px 5px;
+    font-size: 13px;
+  }
+  .shopcategory-sort img {
+    width: 11px;
+    height: 6px;
+  }
+  .shpcategory-indexsort {
+    font-size: 13px;
+  }
 }
 @media (max-width: 441px) {
   .shopcategory-products {

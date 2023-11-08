@@ -102,6 +102,7 @@
   }
   .nav-logo-p {
     font-size: 18px;
+    display: none;
   }
   .nav-logo img {
     width: auto;
@@ -109,9 +110,10 @@
   }
   .nav-menu {
     gap: 10px;
+    padding: 0px;
   }
   .nav-menu li {
-    font-size: 16px;
+    font-size: 13px;
   }
   .nav-login-cart {
     gap: 10px;

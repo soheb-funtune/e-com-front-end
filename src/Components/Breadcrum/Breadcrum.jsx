@@ -25,7 +25,9 @@ const Breadcrum = ({ category, name, id }) => {
         src={dropdown_icon}
         alt="dropdown-right-icon"
       />
-      <Link to={`/product/${id}`}>{name}</Link>
+      <Link to={`/product/${id}`}>
+        {name?.length > 12 ? name?.substring(0, 15) : name}
+      </Link>
     </div>
   );
 };

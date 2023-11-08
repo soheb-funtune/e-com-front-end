@@ -9,13 +9,13 @@ const ProductDisplay = ({ product }) => {
   return (
     <div className="product-display">
       <div className="left">
+        <img className="big-poster" src={image} alt={image} />
         <div className="images">
           <img src={image} alt={image} />
           <img src={image} alt={image} />
           <img src={image} alt={image} />
           <img src={image} alt={image} />
         </div>
-        <img className="big-poster" src={image} alt={image} />
       </div>
 
       <div className="right">

@@ -32,17 +32,15 @@ const ShopCategory = ({ banner, category }) => {
         {AllProducts?.map((data, i) => {
           if (category === data?.category) {
             return (
-              <Link to={`/product/${data?.id}`}>
-                <Item
-                  width={true}
-                  key={i}
-                  id={data.id}
-                  name={data?.name}
-                  image={data?.image}
-                  new_price={data?.new_price}
-                  old_price={data?.old_price}
-                />
-              </Link>
+              <Item
+                width={true}
+                key={i}
+                id={data.id}
+                name={data?.name}
+                image={data?.image}
+                new_price={data?.new_price}
+                old_price={data?.old_price}
+              />
             );
           }
         })}

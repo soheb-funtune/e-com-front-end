@@ -10,3 +10,16 @@
   height: 10px;
   transform: rotate(-90deg);
 }
+
+@media (max-width: 767px) {
+  .breadcrum-container {
+    padding: 10px;
+  }
+  .breadcrum-container a {
+    font-size: 13px;
+  }
+  .left-icon {
+    width: 9px;
+    height: 8px;
+  }
+}
