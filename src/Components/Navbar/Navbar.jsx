@@ -44,10 +44,12 @@ const Navbar = () => {
           {" "}
           <Link to={"/login"}>Login</Link>
         </button>
-        <Link to={"/cart"}>
-          <img src={cartIcon} alt="cart-icon" />
-        </Link>
-        <div className="nav-cart-count">0</div>
+        <div style={{ position: "relative" }}>
+          <Link to={"/cart"}>
+            <img src={cartIcon} alt="cart-icon" />
+            <div className="nav-cart-count">0</div>
+          </Link>
+        </div>
       </div>
     </div>
   );

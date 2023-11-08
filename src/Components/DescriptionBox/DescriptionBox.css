@@ -1,0 +1,36 @@
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin: 30px 100px;
+  /* gap: 20px; */
+}
+@media (max-width: 993px) {
+  .description {
+    margin: 30px;
+  }
+}
+.description-head {
+  display: flex;
+}
+.description-head span {
+  border: 1px solid gray;
+  border-bottom: none;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 17px;
+  color: black;
+}
+.description-head span:last-child {
+  border-left: none;
+}
+
+.description-text {
+  text-align: left;
+  font-size: 16px;
+}
+.description-text p {
+  font-size: 15px;
+  padding: 20px;
+  border: 1px solid gray;
+}

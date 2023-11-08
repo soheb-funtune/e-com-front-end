@@ -1,0 +1,12 @@
+.breadcrum-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 0px 10px 100px;
+}
+
+.left-icon {
+  width: 15px;
+  height: 10px;
+  transform: rotate(-90deg);
+}

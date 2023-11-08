@@ -3,6 +3,7 @@ import "./ShopCategory.css";
 import dropdown_icon from "../../Components/Assets/dropdown_icon.png";
 import { useGetContext } from "../../Context/ShopContext/ShopContext";
 import Item from "../../Components/Items/Item";
+import { Link } from "react-router-dom";
 
 const ShopCategory = ({ banner, category }) => {
   const { AllProducts } = useGetContext();
@@ -31,15 +32,17 @@ const ShopCategory = ({ banner, category }) => {
         {AllProducts?.map((data, i) => {
           if (category === data?.category) {
             return (
-              <Item
-                width={true}
-                key={i}
-                id={data.id}
-                name={data?.name}
-                image={data?.image}
-                new_price={data?.new_price}
-                old_price={data?.old_price}
-              />
+              <Link to={`/product/${data?.id}`}>
+                <Item
+                  width={true}
+                  key={i}
+                  id={data.id}
+                  name={data?.name}
+                  image={data?.image}
+                  new_price={data?.new_price}
+                  old_price={data?.old_price}
+                />
+              </Link>
             );
           }
         })}

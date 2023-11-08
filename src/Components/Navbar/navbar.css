@@ -17,7 +17,7 @@
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 30px;
   list-style: none;
   color: gray;
   font-size: 20px;
@@ -30,6 +30,7 @@
   justify-content: center;
   gap: 3px;
   cursor: pointer;
+  font-size: 16px;
   position: relative;
 }
 .nav-menu li::before {
@@ -51,10 +52,10 @@
 .nav-login-cart {
   display: flex;
   align-items: center;
-  gap: 45px;
+  gap: 15px;
 }
 .nav-login-cart button {
-  padding: 5px 30px;
+  padding: 1px 18px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,7 +63,7 @@
   border: 1px solid #7a7a7a;
   border-radius: 75px;
   color: #515151;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
   background: white;
   cursor: pointer;
@@ -71,18 +72,19 @@
 .nav-login-cart button:active {
   background: #f3f3f3;
 }
+.nav-login-cart a img {
+  width: auto;
+  height: 25px;
+}
 
 .nav-cart-count {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -35px;
-  margin-left: -55px;
-  border-radius: 11px;
-  font-size: 14px;
-  background: red;
+  position: absolute;
+  top: -5px;
+  right: -7px;
+  background: orange;
+  padding: 0px 5px;
+  border-radius: 100%;
+  font-size: 11px;
   color: white;
 }
 
@@ -92,4 +94,34 @@
 }
 .navbar a:hover {
   color: #515151;
+}
+
+@media (max-width: 767px) {
+  .nav-logo {
+    gap: 5px;
+  }
+  .nav-logo-p {
+    font-size: 18px;
+  }
+  .nav-logo img {
+    width: auto;
+    height: 35px;
+  }
+  .nav-menu {
+    gap: 10px;
+  }
+  .nav-menu li {
+    font-size: 16px;
+  }
+  .nav-login-cart {
+    gap: 10px;
+  }
+  .nav-login-cart button {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+  .nav-login-cart a img {
+    width: auto;
+    height: 25px;
+  }
 }

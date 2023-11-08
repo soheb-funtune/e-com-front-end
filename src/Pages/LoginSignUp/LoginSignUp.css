@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   padding-top: 50px;
-  background: linear-gradient(180deg, #fde1ff, #e1ffea22 60%);
+  background: linear-gradient(180deg, #ff7235, #c17758 60%);
 }
 
 .login-signup-container {
@@ -45,30 +45,29 @@
 .btn {
   width: 80%;
   margin: 0px auto;
-  background: #f7dddd;
+  background: #ed3535;
   color: white;
-  border: 1px solid #f7dddd;
+  border: 1px solid #ed3535;
   transition: all ease-in-out 0.4s;
 }
 
 .btn:active {
-  border: 1px solid #f7dddd;
+  border: 1px solid #ed3535;
   transform: scale(1.2);
 }
 .btn:focus-visible,
 .btn:focus,
 .btn:hover {
   outline: none;
-  border: 1px solid #f7dddd;
+  border: 1px solid #ed3535;
 }
 
 .aleady-have-account {
   font-size: 13px;
-  font-family: popins;
 }
 .aleady-have-account span {
   text-decoration: underline;
-  color: #e45d5d;
+  color: white;
 }
 
 .login-signup-agree {
