@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 
 import logo from "../Assets/logo.png";
 import cartIcon from "../Assets/cart_icon.png";
+import dropdown_icon from "../Assets/dropdown_icon.png";
 
 const Navbar = () => {
+  const [mobileMenu, setMobileMenu] = useState(false);
   const [menu, setMenu] = useState("shop");
   return (
     <div className="navbar">
@@ -39,7 +41,34 @@ const Navbar = () => {
           <Link to={"/kids"}>Kids</Link>
         </li>
       </ul>
+
       <div className="nav-login-cart">
+        <div className="mobile-nav-menu">
+          <h3 onClick={() => setMobileMenu(!mobileMenu)}>
+            Categories{" "}
+            <img
+              className="drop-icon"
+              src={dropdown_icon}
+              style={{ width: "13px", height: "10px" }}
+              alt="dropdown_icon"
+            />
+          </h3>
+
+          <ul className={`mobile-ul ${mobileMenu ? "show-mobile" : ""}`}>
+            <li onClick={() => setMobileMenu(false)}>
+              <Link to={"/"}>Shop</Link>
+            </li>
+            <li onClick={() => setMobileMenu(false)}>
+              <Link to={"/mens"}>Mens</Link>
+            </li>
+            <li onClick={() => setMobileMenu(false)}>
+              <Link to={"/womens"}>Womens</Link>
+            </li>
+            <li onClick={() => setMobileMenu(false)}>
+              <Link to={"/kids"}>Kids</Link>
+            </li>
+          </ul>
+        </div>
         <button>
           {" "}
           <Link to={"/login"}>Login</Link>
