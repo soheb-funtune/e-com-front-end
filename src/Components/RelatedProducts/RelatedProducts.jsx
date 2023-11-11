@@ -2,14 +2,14 @@ import React from "react";
 import "./RelatedProducts.css";
 import data_product from "../Assets/data";
 import Item from "../Items/Item";
-const RelatedProducts = () => {
+const RelatedProducts = ({ restProducts }) => {
   return (
     <div className="related-product">
       <h1>
         Related Products <hr />
       </h1>
       <div className="items-container">
-        {data_product?.map((item, i) => (
+        {restProducts?.map((item, i) => (
           <Item
             width={true}
             key={i}

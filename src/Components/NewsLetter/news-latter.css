@@ -54,6 +54,7 @@
   /* border: none; */
 }
 .news-letter div button {
+  padding: 15px;
   background: black;
   color: white;
   border: none;

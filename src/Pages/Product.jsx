@@ -8,11 +8,17 @@ import RelatedProducts from "../Components/RelatedProducts/RelatedProducts";
 
 const Product = () => {
   const [product, setProduct] = useState();
+  const [restProducts, setRestProducts] = useState();
   const { productID } = useParams();
 
   const { AllProducts } = useGetContext();
   useEffect(() => {
     let res = AllProducts?.find((item) => item?.id === Number(productID));
+    let restItem = AllProducts?.filter(
+      (item) =>
+        item?.id !== Number(productID) && res?.category == item?.category
+    );
+    setRestProducts(restItem);
     setProduct(res);
   }, [productID, AllProducts]);
   return (
@@ -20,7 +26,7 @@ const Product = () => {
       <Breadcrum {...product} />
       {product && <ProductDisplay product={product} />}
       <DescriptionBox />
-      <RelatedProducts />
+      <RelatedProducts restProducts={restProducts} />
     </div>
   );
 };

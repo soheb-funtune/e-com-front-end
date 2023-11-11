@@ -4,6 +4,12 @@
   gap: 5px;
   padding: 10px 0px 10px 100px;
 }
+.breadcrum-container a {
+  color: black;
+}
+.breadcrum-container a:hover {
+  color: #ff4141;
+}
 
 .left-icon {
   width: 15px;

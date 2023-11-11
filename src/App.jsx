@@ -13,6 +13,10 @@ import women_banner from "./Components/Assets/banner_women.png";
 import kid_banner from "./Components/Assets/banner_kids.png";
 import { useGetContext } from "./Context/ShopContext/ShopContext";
 
+const Wrap = ({ children }) => {
+  return <div style={{ minHeight: "65vh" }}>{children}</div>;
+};
+
 function App() {
   const { AllProducts } = useGetContext();
   console.log({ AllProducts });
@@ -20,26 +24,30 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Shop />} />
-        <Route
-          path="/mens"
-          element={<ShopCategory banner={men_banner} category="men" />}
-        />
-        <Route
-          path="/womens"
-          element={<ShopCategory banner={women_banner} category="women" />}
-        />
-        <Route
-          path="/kids"
-          element={<ShopCategory banner={kid_banner} category="kid" />}
-        />
-        <Route path="/product" element={<Product />}>
-          <Route path="/product/:productID" element={<Product />} />
-        </Route>
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<LoginSignUp />} />
-      </Routes>
+      <Wrap>
+        {" "}
+        <Routes>
+          <Route path="/" element={<Shop />} />
+          <Route
+            path="/mens"
+            element={<ShopCategory banner={men_banner} category="men" />}
+          />
+          <Route
+            path="/womens"
+            element={<ShopCategory banner={women_banner} category="women" />}
+          />
+          <Route
+            path="/kids"
+            element={<ShopCategory banner={kid_banner} category="kid" />}
+          />
+          <Route path="/product" element={<Product />}>
+            <Route path="/product/:productID" element={<Product />} />
+          </Route>
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<LoginSignUp />} />
+        </Routes>
+      </Wrap>
+
       <Footer />
     </BrowserRouter>
   );
