@@ -127,16 +127,15 @@
   .mobile-ul {
     display: none;
     margin-top: 10px;
-    /* display: flex; */
     flex-direction: column;
     list-style: none;
-    /* border: 1px solid gray; */
     align-items: center;
     padding: 6px 9px;
     box-sizing: border-box;
     transition: all ease-in-out 0.4s;
     background: white;
     z-index: 2;
+    border-radius: 5px;
   }
   .show-mobile {
     display: flex;

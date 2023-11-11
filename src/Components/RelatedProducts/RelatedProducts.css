@@ -20,3 +20,28 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+
+@media (max-width: 993px) {
+  .items-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .related-product {
+    margin: 20px 30px;
+  }
+  .related-product h1 {
+    font-size: 32px;
+  }
+}
+@media (max-width: 767px) {
+  .items-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .related-product h1 {
+    font-size: 30px;
+  }
+}
+@media (max-width: 441px) {
+  .items-container {
+    grid-template-columns: 1fr;
+  }
+}

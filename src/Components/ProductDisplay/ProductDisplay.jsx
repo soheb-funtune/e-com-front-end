@@ -2,9 +2,11 @@ import React from "react";
 import "./ProductDisplay.css";
 import star_icon from "../Assets/star_icon.png";
 import star_dull_icon from "../Assets/star_dull_icon.png";
+import { useGetContext } from "../../Context/ShopContext/ShopContext";
 
 const ProductDisplay = ({ product }) => {
-  const { image, name, new_price, old_price } = product;
+  const { addToCartFun } = useGetContext();
+  const { image, name, new_price, old_price, id } = product;
   console.log({ product });
   return (
     <div className="product-display">
@@ -43,7 +45,9 @@ const ProductDisplay = ({ product }) => {
             <span>XXl</span>
           </div>
         </div>
-        <div className="add-to-cart">Add to Cart</div>
+        <button className="add-to-cart" onClick={() => addToCartFun(id)}>
+          Add to Cart
+        </button>
         <div className="category-div">
           <b>Category : </b>
           <span>Women</span>

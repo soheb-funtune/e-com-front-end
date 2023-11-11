@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 import logo from "../Assets/logo.png";
 import cartIcon from "../Assets/cart_icon.png";
 import dropdown_icon from "../Assets/dropdown_icon.png";
+import { useGetContext } from "../../Context/ShopContext/ShopContext";
 
 const Navbar = () => {
+  const { cartItems } = useGetContext();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [menu, setMenu] = useState("shop");
   return (
@@ -76,7 +78,7 @@ const Navbar = () => {
         <div style={{ position: "relative" }}>
           <Link to={"/cart"}>
             <img src={cartIcon} alt="cart-icon" />
-            <div className="nav-cart-count">0</div>
+            <div className="nav-cart-count">{cartItems?.totalCount}</div>
           </Link>
         </div>
       </div>

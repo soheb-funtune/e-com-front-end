@@ -1,0 +1,36 @@
+.cart {
+  margin: 20px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.heading-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heading-div h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  font-weight: 700;
+  position: relative;
+}
+.heading-div h2 hr {
+  width: 100%;
+  height: 3px;
+  background: #ff4141;
+  border-radius: 100%;
+}
+
+.total-price-div {
+  display: flex;
+  align-items: start;
+  gap: 30px;
+  font-size: 14px;
+}
+.total-price-div span b {
+  color: #ff4141;
+}
