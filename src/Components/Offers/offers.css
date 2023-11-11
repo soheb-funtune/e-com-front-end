@@ -1,5 +1,6 @@
 .offers {
   width: 65%;
+  position: relative;
   margin-top: 50px;
   /* height: 60vh; */
 
@@ -44,4 +45,25 @@
   align-items: center;
   justify-content: flex-end;
   padding-top: 50px;
+}
+
+@media (max-width: 767px) {
+  .offers {
+    margin: 0px auto 50px;
+    padding: 50px 40px;
+  }
+  .offers-left {
+    align-items: center;
+    justify-content: center;
+  }
+  .offers-right {
+    position: absolute;
+    z-index: -1;
+    right: 0px;
+    bottom: 0px;
+  }
+  .offers-right img {
+    width: fit-content;
+    height: 310px;
+  }
 }
