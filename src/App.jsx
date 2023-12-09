@@ -12,6 +12,7 @@ import men_banner from "./Components/Assets/banner_mens.png";
 import women_banner from "./Components/Assets/banner_women.png";
 import kid_banner from "./Components/Assets/banner_kids.png";
 import { useGetContext } from "./Context/ShopContext/ShopContext";
+import CreateItem from "./Pages/CreateItem/CreateItem";
 
 const Wrap = ({ children }) => {
   return <div style={{ minHeight: "65vh" }}>{children}</div>;
@@ -28,6 +29,7 @@ function App() {
         {" "}
         <Routes>
           <Route path="/" element={<Shop />} />
+          <Route path="/create" element={<CreateItem />} />
           <Route
             path="/mens"
             element={<ShopCategory banner={men_banner} category="men" />}
