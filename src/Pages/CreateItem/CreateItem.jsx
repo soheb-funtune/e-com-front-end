@@ -13,13 +13,15 @@ const CreateItem = () => {
       ImageItem?.name &&
       ImageItem?.description &&
       ImageItem?.old_price &&
-      ImageItem?.new_price
+      ImageItem?.new_price &&
+      ImageItem?.category
     ) {
       formData.set("image", ImageItem?.image);
       formData.set("name", ImageItem?.name);
       formData.set("description", ImageItem?.description);
       formData.set("old_price", ImageItem?.old_price);
       formData.set("new_price", ImageItem?.new_price);
+      formData.set("category", ImageItem?.category);
       await axios
         .post("http://localhost:4000/create", formData)
         .then((res) => res.data)
@@ -82,6 +84,41 @@ const CreateItem = () => {
             }
           />
         </FlexCol>
+        <InputWrapper>
+          <label htmlFor="kids">Kids :</label>
+          <input
+            id="kids"
+            rows={10}
+            type="radio"
+            name="category"
+            value={"kid"}
+            onChange={(e) =>
+              setImageItem({ ...ImageItem, [e.target.name]: e.target.value })
+            }
+          />
+          <label htmlFor="men">Men :</label>
+          <input
+            id="men"
+            rows={10}
+            type="radio"
+            name="category"
+            value={"men"}
+            onChange={(e) =>
+              setImageItem({ ...ImageItem, [e.target.name]: e.target.value })
+            }
+          />
+          <label htmlFor="women">Women :</label>
+          <input
+            id="women"
+            rows={10}
+            type="radio"
+            name="category"
+            value={"women"}
+            onChange={(e) =>
+              setImageItem({ ...ImageItem, [e.target.name]: e.target.value })
+            }
+          />
+        </InputWrapper>
         <FlexCol>
           <input
             type="file"

@@ -5,6 +5,8 @@
   width: 100%;
 }
 .item img {
+  height: auto;
+
   width: 100%;
 }
 .item:hover {
@@ -43,5 +45,10 @@
   }
   .item-old-price {
     font-size: 13px;
+  }
+}
+@media (min-width: 440px) {
+  .item img {
+    height: 350px;
   }
 }

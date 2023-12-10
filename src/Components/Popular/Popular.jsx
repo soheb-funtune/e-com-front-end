@@ -8,8 +8,8 @@ const Popular = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      axios
-        .get("http://localhost:4000/getItems")
+      await axios
+        .get("http://localhost:4000/getItems?sort=women")
         .then((res) => res.data)
         .then((res) => {
           console.log({ res, popularData });

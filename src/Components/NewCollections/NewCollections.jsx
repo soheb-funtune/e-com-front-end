@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./new-collection.css";
-import newCollection from "../Assets/new_collections";
+import newCollections from "../Assets/new_collections";
 import Item from "../Items/Item";
+import axios from "axios";
 
 const NewCollections = () => {
+  const [newCollection, setNewCollection] = useState(newCollections);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("http://localhost:4000/getItems")
+        .then((res) => res.data)
+        .then((res) => {
+          console.log({ res, newCollection });
+          setNewCollection([...res.reverse(), ...newCollection]);
+        })
+        .catch((err) => console.error(err));
+    };
+    fetchData();
+  }, []);
   return (
     <div className="new-collections">
       <h1>
@@ -15,7 +31,7 @@ const NewCollections = () => {
           <Item
             width={true}
             key={i}
-            id={item.id}
+            id={item.id || item?._id}
             name={item?.name}
             image={item?.image}
             new_price={item?.new_price}

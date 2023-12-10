@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./ShopCategory.css";
 import dropdown_icon from "../../Components/Assets/dropdown_icon.png";
 import { useGetContext } from "../../Context/ShopContext/ShopContext";
 import Item from "../../Components/Items/Item";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const ShopCategory = ({ banner, category }) => {
   const { AllProducts } = useGetContext();
-  console.log({ AllProducts });
+  const [categoryArray, setCategoryArray] = useState([]);
 
+  useEffect(() => {
+    setCategoryArray([]);
+
+    const fetchData = async () => {
+      await axios
+        .get(`http://localhost:4000/getItems?sort=${category}`)
+        .then((res) => res.data)
+        .then((res) => {
+          console.log({ res });
+          setCategoryArray(Array.from(new Set([...res])));
+        })
+        .catch((err) => console.error(err));
+    };
+    fetchData();
+  }, [category]);
+  console.log({ categoryArray });
   return (
     <div className="shop-category">
       <img src={banner} alt={banner} />
@@ -29,20 +46,19 @@ const ShopCategory = ({ banner, category }) => {
         </div>
       </div>
       <div className="shopcategory-products">
-        {AllProducts?.map((data, i) => {
-          if (category === data?.category) {
+        {categoryArray?.map((data, i) => {
+          if (data?.category === category)
             return (
               <Item
                 width={true}
                 key={i}
-                id={data.id}
+                id={data.id || data?._id}
                 name={data?.name}
                 image={data?.image}
                 new_price={data?.new_price}
                 old_price={data?.old_price}
               />
             );
-          }
         })}
       </div>
       <button className="shopcategory-loadmore">Explore More</button>
