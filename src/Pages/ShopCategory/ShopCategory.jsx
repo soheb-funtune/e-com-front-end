@@ -11,6 +11,7 @@ const ShopCategory = ({ banner, category }) => {
   const [sortBy, setSortBy] = useState("");
   const { AllProducts } = useGetContext();
   const [categoryArray, setCategoryArray] = useState([]);
+  const [remainingItems, setRemainingItems] = useState([]);
 
   useEffect(() => {
     setCategoryArray([]);
@@ -21,15 +22,19 @@ const ShopCategory = ({ banner, category }) => {
         .then((res) => res.data)
         .then((res) => {
           console.log({ res });
-          setCategoryArray(
+          const chunks = _.chunk(
             sortBy
               ? _.sortBy(res, [
                   function (o) {
                     return o?.[sortBy];
                   },
                 ])
-              : Array.from(new Set([...res]))
+              : Array.from(new Set([...res])),
+            8
           );
+
+          setCategoryArray(chunks[0]);
+          setRemainingItems(chunks[1]);
         })
         .catch((err) => console.error(err));
     };
@@ -88,7 +93,16 @@ const ShopCategory = ({ banner, category }) => {
             );
         })}
       </div>
-      <button className="shopcategory-loadmore">Explore More</button>
+      {remainingItems?.length > 0 && (
+        <button
+          className="shopcategory-loadmore"
+          onClick={() =>
+            setCategoryArray([...categoryArray, ...remainingItems])
+          }
+        >
+          Explore More
+        </button>
+      )}
     </div>
   );
 };
