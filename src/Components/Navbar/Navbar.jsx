@@ -19,25 +19,25 @@ const Navbar = () => {
       </div>
       <ul className="nav-menu">
         <li
-          className={menu === "shop" ? "active" : ""}
+          className={menu === "shop" ? "active-anchor" : ""}
           onClick={() => setMenu("shop")}
         >
           <Link to={"/"}>Shop</Link>
         </li>
         <li
-          className={menu === "mens" ? "active" : ""}
+          className={menu === "mens" ? "active-anchor" : ""}
           onClick={() => setMenu("mens")}
         >
           <Link to={"/mens"}>Mens</Link>
         </li>
         <li
-          className={menu === "womens" ? "active" : ""}
-          onClick={() => setMenu("womems")}
+          className={menu === "womens" ? "active-anchor" : ""}
+          onClick={() => setMenu("womens")}
         >
           <Link to={"/womens"}>Womens</Link>
         </li>
         <li
-          className={menu === "kids" ? "active" : ""}
+          className={menu === "kids" ? "active-anchor" : ""}
           onClick={() => setMenu("kids")}
         >
           <Link to={"/kids"}>Kids</Link>

@@ -25,7 +25,10 @@ const CreateItem = () => {
       await axios
         .post("http://localhost:4000/create", formData)
         .then((res) => res.data)
-        .then((res) => setBackendData(res))
+        .then((res) => {
+          alert("Submitted Successfylly !");
+          setBackendData(res);
+        })
         .catch((err) => console.error(err));
     }
 
@@ -85,7 +88,6 @@ const CreateItem = () => {
           />
         </FlexCol>
         <InputWrapper>
-          <label htmlFor="kids">Kids :</label>
           <input
             id="kids"
             rows={10}
@@ -96,7 +98,7 @@ const CreateItem = () => {
               setImageItem({ ...ImageItem, [e.target.name]: e.target.value })
             }
           />
-          <label htmlFor="men">Men :</label>
+          <label htmlFor="kids">Kids</label>
           <input
             id="men"
             rows={10}
@@ -106,8 +108,8 @@ const CreateItem = () => {
             onChange={(e) =>
               setImageItem({ ...ImageItem, [e.target.name]: e.target.value })
             }
-          />
-          <label htmlFor="women">Women :</label>
+          />{" "}
+          <label htmlFor="men">Men</label>
           <input
             id="women"
             rows={10}
@@ -117,7 +119,8 @@ const CreateItem = () => {
             onChange={(e) =>
               setImageItem({ ...ImageItem, [e.target.name]: e.target.value })
             }
-          />
+          />{" "}
+          <label htmlFor="women">Women</label>
         </InputWrapper>
         <FlexCol>
           <input
@@ -156,9 +159,13 @@ export default CreateItem;
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 50px;
   width: 100%;
   min-height: 100vh;
+
+  @media (max-width: 767px) {
+    margin-top: 0px;
+  }
 `;
 const StyledForm = styled.form`
   display: flex;
@@ -168,10 +175,19 @@ const StyledForm = styled.form`
   height: max-content;
   padding: 30px;
   background-color: #f3f3f3;
+  @media (max-width: 767px) {
+    background-color: #ffff;
+  }
 `;
 const InputWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
 `;
 
 const FlexCol = styled.div`
@@ -179,4 +195,9 @@ const FlexCol = styled.div`
   flex-direction: column;
   gap: 20px;
   align-items: flex-start;
+  input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
 `;

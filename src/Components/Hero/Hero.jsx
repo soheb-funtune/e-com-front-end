@@ -4,6 +4,15 @@ import arrowIcon from "../Assets/arrow.png";
 import heroImage from "../Assets/hero_image.png";
 import "./hero.css";
 const Hero = () => {
+  function scrollToElement(elementId) {
+    const element = document.getElementById(elementId);
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth", // Optional: smooth scrolling animation
+      });
+    }
+  }
   return (
     <div className="hero">
       <div className="hero-left">
@@ -17,7 +26,13 @@ const Hero = () => {
           <p>for Everyone</p>
         </div>
         <div className="hero-latest-button">
-          <div>Latest Collection</div>
+          <a
+            style={{ textDecoration: "none", color: "#ffff" }}
+            href="#"
+            onClick={() => scrollToElement("newcollection")}
+          >
+            Latest Collection
+          </a>
           <img src={arrowIcon} alt={"arrowIcon"} />
         </div>
       </div>

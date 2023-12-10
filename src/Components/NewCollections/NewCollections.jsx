@@ -21,7 +21,7 @@ const NewCollections = () => {
     fetchData();
   }, []);
   return (
-    <div className="new-collections">
+    <div id="newcollection" className="new-collections">
       <h1>
         NEW COLLECTIONS <hr />
       </h1>

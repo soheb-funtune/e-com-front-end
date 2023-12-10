@@ -42,10 +42,10 @@
   width: 0%;
   height: 3px;
   background: #ff4141;
-  transition: width ease-in-out 0.3s;
+  transition: all ease-in-out 0.3s;
 }
 .nav-menu li:hover:before,
-.nav-menu .active::before {
+.nav-menu .active-anchor::before {
   width: 100%;
 }
 
