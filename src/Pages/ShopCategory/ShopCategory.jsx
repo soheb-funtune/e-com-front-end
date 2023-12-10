@@ -5,8 +5,10 @@ import { useGetContext } from "../../Context/ShopContext/ShopContext";
 import Item from "../../Components/Items/Item";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import _ from "lodash";
 
 const ShopCategory = ({ banner, category }) => {
+  const [sortBy, setSortBy] = useState("");
   const { AllProducts } = useGetContext();
   const [categoryArray, setCategoryArray] = useState([]);
 
@@ -19,13 +21,32 @@ const ShopCategory = ({ banner, category }) => {
         .then((res) => res.data)
         .then((res) => {
           console.log({ res });
-          setCategoryArray(Array.from(new Set([...res])));
+          setCategoryArray(
+            sortBy
+              ? _.sortBy(res, [
+                  function (o) {
+                    return o?.[sortBy];
+                  },
+                ])
+              : Array.from(new Set([...res]))
+          );
         })
         .catch((err) => console.error(err));
     };
     fetchData();
   }, [category]);
-  console.log({ categoryArray });
+  useEffect(() => {
+    if (sortBy) {
+      const res = _.sortBy(categoryArray, [
+        function (o) {
+          return o?.[sortBy];
+        },
+      ]);
+      setCategoryArray(res);
+      console.log({ res });
+    }
+  }, [sortBy]);
+  console.log({ sortBy, categoryArray });
   return (
     <div className="shop-category">
       <img src={banner} alt={banner} />
@@ -35,15 +56,21 @@ const ShopCategory = ({ banner, category }) => {
             <span>Showing 1-12</span> out of 36 products
           </p>
         </div>
-        <div className="shopcategory-sort">
-          Sort by{" "}
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="shopcategory-sort"
+        >
+          Sort by <option value={""}>Sort By</option>
+          <option value={"name"}>By Name</option>
+          <option value={"new_price"}>By Price</option>
           <img
             className="drop-icon"
             src={dropdown_icon}
             style={{ width: "13px", height: "10px" }}
             alt="dropdown_icon"
           />
-        </div>
+        </select>
       </div>
       <div className="shopcategory-products">
         {categoryArray?.map((data, i) => {

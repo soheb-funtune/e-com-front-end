@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Shop from "./Pages/Shop";
@@ -13,14 +13,28 @@ import women_banner from "./Components/Assets/banner_women.png";
 import kid_banner from "./Components/Assets/banner_kids.png";
 import { useGetContext } from "./Context/ShopContext/ShopContext";
 import CreateItem from "./Pages/CreateItem/CreateItem";
+import axios from "axios";
 
 const Wrap = ({ children }) => {
   return <div style={{ minHeight: "65vh" }}>{children}</div>;
 };
 
 function App() {
-  const { AllProducts } = useGetContext();
-  console.log({ AllProducts });
+  const { setAllItems } = useGetContext();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("http://localhost:4000/getItems")
+        .then((res) => res.data)
+        .then((res) => {
+          console.log({ res });
+          setAllItems(res);
+        })
+        .catch((err) => console.error(err));
+    };
+    fetchData();
+  }, []);
 
   return (
     <BrowserRouter>

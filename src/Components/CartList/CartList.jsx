@@ -6,9 +6,9 @@ const CartList = () => {
     useGetContext();
   return (
     <div className="cart-list-items">
-      {cartItems?.data?.map(({ name, image, new_price, quantity, id }) => (
-        <div key={id} className="cart-item">
-          <button onClick={() => removeItem(id)} className="remove-item">
+      {cartItems?.data?.map(({ name, image, new_price, quantity, _id }) => (
+        <div key={_id} className="cart-item">
+          <button onClick={() => removeItem(_id)} className="remove-item">
             X
           </button>
           <img src={image} alt={name} />
@@ -27,11 +27,11 @@ const CartList = () => {
                 </span>
               </div>
               <div className="quantity-handler">
-                <button onClick={() => quantity != 0 && descreaseCartItem(id)}>
+                <button onClick={() => quantity != 0 && descreaseCartItem(_id)}>
                   -
                 </button>
                 <span>{quantity}</span>
-                <button onClick={() => addToCartFun(id)}>+</button>
+                <button onClick={() => addToCartFun(_id)}>+</button>
               </div>
             </div>
           </div>

@@ -3,9 +3,11 @@ import "./new-collection.css";
 import newCollections from "../Assets/new_collections";
 import Item from "../Items/Item";
 import axios from "axios";
+import { useGetContext } from "../../Context/ShopContext/ShopContext";
 
 const NewCollections = () => {
   const [newCollection, setNewCollection] = useState(newCollections);
+  const { setAllItems } = useGetContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,7 +16,7 @@ const NewCollections = () => {
         .then((res) => res.data)
         .then((res) => {
           console.log({ res, newCollection });
-          setNewCollection([...res.reverse(), ...newCollection]);
+          setNewCollection([...res.reverse()]);
         })
         .catch((err) => console.error(err));
     };

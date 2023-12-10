@@ -6,7 +6,7 @@ import { useGetContext } from "../../Context/ShopContext/ShopContext";
 
 const ProductDisplay = ({ product }) => {
   const { addToCartFun } = useGetContext();
-  const { image, name, new_price, old_price, id } = product;
+  const { image, name, description, new_price, old_price, _id } = product;
   console.log({ product });
   return (
     <div className="product-display">
@@ -34,7 +34,7 @@ const ProductDisplay = ({ product }) => {
           <span>${old_price}</span>
           <span>${new_price}</span>
         </div>
-        <p>Descirption </p>
+        <p>{description || "Descirption"} </p>
         <div className="sizes">
           <h3>Select Size</h3>
           <div className="size-div">
@@ -45,7 +45,7 @@ const ProductDisplay = ({ product }) => {
             <span>XXl</span>
           </div>
         </div>
-        <button className="add-to-cart" onClick={() => addToCartFun(id)}>
+        <button className="add-to-cart" onClick={() => addToCartFun(_id)}>
           Add to Cart
         </button>
         <div className="category-div">

@@ -13,7 +13,7 @@ const Popular = () => {
         .then((res) => res.data)
         .then((res) => {
           console.log({ res, popularData });
-          setPopularData([...res, ...popularData]);
+          setPopularData([...res]);
         })
         .catch((err) => console.error(err));
     };

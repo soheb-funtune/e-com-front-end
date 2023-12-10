@@ -5,6 +5,7 @@ import { useGetContext } from "../Context/ShopContext/ShopContext";
 import Breadcrum from "../Components/Breadcrum/Breadcrum";
 import DescriptionBox from "../Components/DescriptionBox/DescriptionBox";
 import RelatedProducts from "../Components/RelatedProducts/RelatedProducts";
+import axios from "axios";
 
 const Product = () => {
   const [product, setProduct] = useState();
@@ -13,14 +14,28 @@ const Product = () => {
 
   const { AllProducts } = useGetContext();
   useEffect(() => {
-    let res = AllProducts?.find((item) => item?.id === Number(productID));
-    let restItem = AllProducts?.filter(
-      (item) =>
-        item?.id !== Number(productID) && res?.category == item?.category
-    );
-    setRestProducts(restItem);
-    setProduct(res);
-  }, [productID, AllProducts]);
+    const fetchData = async () => {
+      await axios
+        .get(`http://localhost:4000/getItems?_id=${productID}`)
+        .then((res) => res.data)
+        .then((res) => {
+          console.log({ res });
+          setProduct(res);
+        })
+        .catch((err) => console.error(err));
+    };
+    fetchData();
+  }, []);
+
+  // useEffect(() => {
+  //   let res = AllProducts?.find((item) => item?._id === Number(productID));
+  //   let restItem = AllProducts?.filter(
+  //     (item) =>
+  //       item?.id !== Number(productID) && res?.category == item?.category
+  //   );
+  //   setRestProducts(restItem);
+  //   setProduct(res);
+  // }, [productID, AllProducts]);
   return (
     <div>
       <Breadcrum {...product} />

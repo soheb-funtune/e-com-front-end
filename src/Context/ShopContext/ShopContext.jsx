@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import AllProducts from "../../Components/Assets/all_product";
 
 const ShopContext = new createContext(null);
@@ -9,11 +9,12 @@ export const useGetContext = () => {
 
 const ShopContextProdider = ({ children }) => {
   const [cartItems, setCartItems] = useState({ totalCount: 0, data: [] });
+  const [allItems, setAllItems] = useState([]);
 
   // remove card item from list
   const removeItem = (id) => {
-    const res = cartItems?.data?.filter((item) => item?.id == id);
-    const filteredArr = cartItems?.data?.filter((item) => item?.id != id);
+    const res = cartItems?.data?.filter((item) => item?._id == id);
+    const filteredArr = cartItems?.data?.filter((item) => item?._id != id);
     console.log("remove Item Called:", { res, filteredArr });
     setCartItems({
       totalCount: cartItems?.totalCount - res[0]?.quantity,
@@ -25,7 +26,7 @@ const ShopContextProdider = ({ children }) => {
     setCartItems({
       totalCount: cartItems?.totalCount == 0 ? 0 : cartItems?.totalCount - 1,
       data: cartItems?.data?.map((item) =>
-        item?.id == id
+        item?._id == id
           ? { ...item, quantity: item?.quantity == 0 ? 0 : item?.quantity - 1 }
           : item
       ),
@@ -33,18 +34,13 @@ const ShopContextProdider = ({ children }) => {
   };
   // adding item into cart and also increasing the cart item quantity
   const addToCartFun = (id) => {
-    const res = AllProducts?.find((item) => item?.id === id);
+    const res = allItems?.find((item) => item?._id === id);
     const quantityUpdate = cartItems?.data?.map((item) =>
-      item?.id == id ? { ...item, quantity: item?.quantity + 1 } : item
+      item?._id == id ? { ...item, quantity: item?.quantity + 1 } : item
     );
 
-    const itemAlready = cartItems?.data?.filter((item) => item?.id === id);
-    console.log(
-      "addToCartFun",
-      [...cartItems?.data, { ...res, quantity: 1 }],
-      itemAlready
-    );
-    itemAlready[0]?.id == id
+    const itemAlready = cartItems?.data?.filter((item) => item?._id === id);
+    itemAlready[0]?._id == id
       ? setCartItems({
           totalCount: cartItems?.totalCount + 1,
           data: [...quantityUpdate],
@@ -60,6 +56,7 @@ const ShopContextProdider = ({ children }) => {
     <ShopContext.Provider
       value={{
         AllProducts,
+        setAllItems,
         cartItems,
         setCartItems,
         addToCartFun,
