@@ -69,12 +69,6 @@ const ShopCategory = ({ banner, category }) => {
           Sort by <option value={""}>Sort By</option>
           <option value={"name"}>By Name</option>
           <option value={"new_price"}>By Price</option>
-          <img
-            className="drop-icon"
-            src={dropdown_icon}
-            style={{ width: "13px", height: "10px" }}
-            alt="dropdown_icon"
-          />
         </select>
       </div>
       <div className="shopcategory-products">
@@ -96,9 +90,10 @@ const ShopCategory = ({ banner, category }) => {
       {remainingItems?.length > 0 && (
         <button
           className="shopcategory-loadmore"
-          onClick={() =>
-            setCategoryArray([...categoryArray, ...remainingItems])
-          }
+          onClick={() => {
+            setCategoryArray([...categoryArray, ...remainingItems]);
+            setRemainingItems([]);
+          }}
         >
           Explore More
         </button>

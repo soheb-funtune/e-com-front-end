@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import logo from "../Assets/logo.png";
 import cartIcon from "../Assets/cart_icon.png";
@@ -8,9 +8,20 @@ import dropdown_icon from "../Assets/dropdown_icon.png";
 import { useGetContext } from "../../Context/ShopContext/ShopContext";
 
 const Navbar = () => {
+  let location = useLocation();
+  const navigate = useNavigate();
+  console.log(location?.pathname);
   const { cartItems } = useGetContext();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [menu, setMenu] = useState("shop");
+
+  useEffect(() => {
+    if (location?.pathname) {
+      navigate(location?.pathname);
+      // console.log(location?.pathname?.split("/"));
+      setMenu(location?.pathname?.split("/")?.[1]);
+    }
+  }, [location?.pathname]);
   return (
     <div className="navbar">
       <div className="nav-logo">
@@ -71,10 +82,10 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <button>
+        {/* <button>
           {" "}
           <Link to={"/login"}>Login</Link>
-        </button>
+        </button> */}
         <div style={{ position: "relative" }}>
           <Link to={"/cart"}>
             <img src={cartIcon} alt="cart-icon" />

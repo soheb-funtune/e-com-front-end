@@ -5,8 +5,14 @@ import Shop from "./Pages/Shop";
 import ShopCategory from "./Pages/ShopCategory/ShopCategory";
 import Product from "./Pages/Product";
 import Cart from "./Pages/Cart/Cart";
-import LoginSignUp from "./Pages/LoginSignUp/LoginSignUp";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import RegisterPage from "./Pages/LoginSignUp/RegisterPage";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Footer from "./Components/Footer/Footer";
 import men_banner from "./Components/Assets/banner_mens.png";
 import women_banner from "./Components/Assets/banner_women.png";
@@ -14,6 +20,7 @@ import kid_banner from "./Components/Assets/banner_kids.png";
 import { useGetContext } from "./Context/ShopContext/ShopContext";
 import CreateItem from "./Pages/CreateItem/CreateItem";
 import axios from "axios";
+import Login from "./Pages/LoginSignUp/Login";
 
 const Wrap = ({ children }) => {
   return <div style={{ minHeight: "65vh" }}>{children}</div>;
@@ -60,7 +67,8 @@ function App() {
             <Route path="/product/:productID" element={<Product />} />
           </Route>
           <Route path="/cart" element={<Cart />} />
-          <Route path="/login" element={<LoginSignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </Wrap>
 
