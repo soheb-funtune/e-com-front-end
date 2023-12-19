@@ -58,7 +58,11 @@ const ShopCategory = ({ banner, category }) => {
       <div className="sort-and-count">
         <div className="shpcategory-indexsort">
           <p>
-            <span>Showing 1-12</span> out of 36 products
+            <span>Showing 1-{categoryArray?.length}</span> out of{" "}
+            {remainingItems?.length
+              ? categoryArray?.length + remainingItems?.length
+              : categoryArray?.length}{" "}
+            products
           </p>
         </div>
         <select
