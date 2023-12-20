@@ -7,21 +7,11 @@ import { useGetContext } from "../../Context/ShopContext/ShopContext";
 
 const NewCollections = () => {
   const [newCollection, setNewCollection] = useState(newCollections);
-  const { setAllItems } = useGetContext();
+  const { setAllItems, allItems } = useGetContext();
 
   useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get("http://localhost:4000/getItems")
-        .then((res) => res.data)
-        .then((res) => {
-          console.log({ res, newCollection });
-          setNewCollection([...res.reverse()]);
-        })
-        .catch((err) => console.error(err));
-    };
-    fetchData();
-  }, []);
+    setNewCollection([...allItems.reverse()]);
+  }, [allItems]);
   return (
     <div id="newcollection" className="new-collections">
       <h1>

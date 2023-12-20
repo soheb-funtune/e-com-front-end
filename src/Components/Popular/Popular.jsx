@@ -3,22 +3,15 @@ import "./popular.css";
 import productData from "../Assets/data";
 import Item from "../Items/Item";
 import axios from "axios";
+import { useGetContext } from "../../Context/ShopContext/ShopContext";
 const Popular = () => {
   const [popularData, setPopularData] = useState(productData);
+  const { allItems } = useGetContext();
 
   useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get("http://localhost:4000/getItems?sort=women")
-        .then((res) => res.data)
-        .then((res) => {
-          console.log({ res, popularData });
-          setPopularData([...res]);
-        })
-        .catch((err) => console.error(err));
-    };
-    fetchData();
-  }, []);
+    const res = allItems?.filter((item) => item?.category == "women");
+    res && setPopularData(res);
+  }, [allItems]);
   console.log({ popularData });
   return (
     <div className="popular">

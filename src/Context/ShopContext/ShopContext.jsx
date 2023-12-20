@@ -62,6 +62,7 @@ const ShopContextProdider = ({ children }) => {
         addToCartFun,
         descreaseCartItem,
         removeItem,
+        allItems,
       }}
     >
       {children}

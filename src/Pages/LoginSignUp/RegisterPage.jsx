@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./LoginSignUp.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const [registerData, setRegisterData] = useState({});
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +15,7 @@ const RegisterPage = () => {
         .post("http://localhost:4000/user/create-user", registerData)
         .then((res) => console.log(res.data))
         .catch((err) => console.log({ err }));
+      navigate("/");
     };
     if (
       registerData?.username &&
@@ -72,7 +74,7 @@ const RegisterPage = () => {
           {" "}
           <p className="aleady-have-account">
             Already have an Account{" "}
-            <Link style={{ color: "white" }} to={"/login"}>
+            <Link style={{ color: "white" }} to={"/"}>
               Login
             </Link>
           </p>

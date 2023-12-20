@@ -21,12 +21,15 @@ import { useGetContext } from "./Context/ShopContext/ShopContext";
 import CreateItem from "./Pages/CreateItem/CreateItem";
 import axios from "axios";
 import Login from "./Pages/LoginSignUp/Login";
+import { useDispatch } from "react-redux";
+import { userData } from "./State/home.slice";
 
 const Wrap = ({ children }) => {
   return <div style={{ minHeight: "65vh" }}>{children}</div>;
 };
 
 function App() {
+  const dispatch = useDispatch();
   const { setAllItems } = useGetContext();
 
   useEffect(() => {
@@ -41,6 +44,10 @@ function App() {
         .catch((err) => console.error(err));
     };
     fetchData();
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user?.token) {
+      dispatch(userData(user));
+    }
   }, []);
 
   return (
@@ -49,26 +56,35 @@ function App() {
       <Wrap>
         {" "}
         <Routes>
-          <Route path="/" element={<Shop />} />
-          <Route path="/create" element={<CreateItem />} />
-          <Route
-            path="/mens"
-            element={<ShopCategory banner={men_banner} category="men" />}
-          />
-          <Route
-            path="/womens"
-            element={<ShopCategory banner={women_banner} category="women" />}
-          />
-          <Route
-            path="/kids"
-            element={<ShopCategory banner={kid_banner} category="kid" />}
-          />
-          <Route path="/product" element={<Product />}>
-            <Route path="/product/:productID" element={<Product />} />
-          </Route>
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<RegisterPage />} />
+          {!localStorage?.getItem("token") ? (
+            <>
+              <Route path="/" element={<Login />} />
+              <Route path="/register" element={<RegisterPage />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Shop />} />
+              <Route path="/create" element={<CreateItem />} />
+              <Route
+                path="/mens"
+                element={<ShopCategory banner={men_banner} category="men" />}
+              />
+              <Route
+                path="/womens"
+                element={
+                  <ShopCategory banner={women_banner} category="women" />
+                }
+              />
+              <Route
+                path="/kids"
+                element={<ShopCategory banner={kid_banner} category="kid" />}
+              />
+              <Route path="/product" element={<Product />}>
+                <Route path="/product/:productID" element={<Product />} />
+              </Route>
+              <Route path="/cart" element={<Cart />} />
+            </>
+          )}
         </Routes>
       </Wrap>
 
