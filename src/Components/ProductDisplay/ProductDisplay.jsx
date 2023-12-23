@@ -14,7 +14,7 @@ const RedioButtons = ({ name, value, setRadioButton, defaultChecked }) => {
         id={value}
         value={value}
         onChange={(e) => setRadioButton(e.target.value)}
-        defaultChecked={defaultChecked}
+        defaultChecked={defaultChecked ? true : false}
       />
       <label htmlFor={value}>{value}</label>
     </>
@@ -22,7 +22,7 @@ const RedioButtons = ({ name, value, setRadioButton, defaultChecked }) => {
 };
 
 const ProductDisplay = ({ product }) => {
-  const [radioButton, setRadioButton] = useState();
+  const [radioButton, setRadioButton] = useState("S");
   const { addToCartFun } = useGetContext();
   const { image, name, description, new_price, old_price, _id } = product;
   console.log({ product });
@@ -39,7 +39,7 @@ const ProductDisplay = ({ product }) => {
       </div>
 
       <div className="right">
-        <h1>{name}</h1>
+        <h1>{name || "Dummy"}</h1>
         <div className="rating-div">
           <img src={star_icon} alt={star_icon} />
           <img src={star_icon} alt={star_icon} />
@@ -84,7 +84,10 @@ const ProductDisplay = ({ product }) => {
             />
           </Radio>
         </div>
-        <button className="add-to-cart" onClick={() => addToCartFun(_id)}>
+        <button
+          className="add-to-cart"
+          onClick={() => addToCartFun({ ...product, sizes: radioButton })}
+        >
           Add to Cart
         </button>
         <div className="category-div">

@@ -21,7 +21,7 @@ import { useGetContext } from "./Context/ShopContext/ShopContext";
 import CreateItem from "./Pages/CreateItem/CreateItem";
 import axios from "axios";
 import Login from "./Pages/LoginSignUp/Login";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userData } from "./State/home.slice";
 
 const Wrap = ({ children }) => {
@@ -30,7 +30,38 @@ const Wrap = ({ children }) => {
 
 function App() {
   const dispatch = useDispatch();
-  const { setAllItems } = useGetContext();
+  const { user } = useSelector((state) => state?.home);
+  const [apiCartData, setApiCartData] = useState([]);
+  const { setAllItems, setCartItems, addToCartFun } = useGetContext();
+
+  useEffect(() => {
+    if (apiCartData?.length > 0) {
+      const res = apiCartData?.reduce((acc, cur) => {
+        return acc + cur?.quantity;
+      }, 0);
+      console.log("all cart data :", apiCartData, res);
+      res &&
+        setCartItems({
+          totalCount: res,
+          data: apiCartData,
+        });
+    }
+  }, [apiCartData]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get(`http://localhost:4000/user/cart-items?user_id=${user?._id}`)
+        .then((res) => {
+          console.log(res.data);
+          setApiCartData(res?.data?.data);
+        })
+        .catch((err) => console.log({ err }));
+    };
+    if (user?._id) {
+      fetchData();
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchData = async () => {
