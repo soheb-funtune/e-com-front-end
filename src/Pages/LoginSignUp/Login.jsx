@@ -4,6 +4,22 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { userData } from "../../State/home.slice";
 import { useSelector, useDispatch } from "react-redux";
+import { setError } from "../../State/home.slice";
+import Swal from "sweetalert2";
+
+const showMessageFun = (text) => {
+  Swal.fire({
+    toast: true,
+    position: "top-end",
+    title: "Info !",
+    text: text,
+    icon: "info",
+  }).then((res) => {
+    if (res) {
+      window.location.reload();
+    }
+  });
+};
 
 const Login = () => {
   const { user } = useSelector((state) => state?.home);
@@ -20,12 +36,24 @@ const Login = () => {
         .then((res) => {
           localStorage.setItem("token", res?.data?.token);
           localStorage.setItem("user", JSON.stringify(res?.data));
-
+          userData(res?.data);
+          if (res?.data?.token && res?.data?.email) {
+            showMessageFun(res?.data?.message);
+          }
           console.log(res.data);
-
-          window.location.reload();
         })
-        .catch((err) => console.log({ err }));
+        .catch((err) => {
+          if (err?.response?.data) {
+            dispatch(
+              setError({
+                isError: true,
+                errorMsg: err?.response?.data?.message,
+              })
+            );
+
+            console.log(err?.response?.data);
+          }
+        });
     };
     if (loginData?.email && loginData?.password) {
       fetchData();

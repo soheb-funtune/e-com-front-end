@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 const initialState = {
   value: 0,
   user: null,
+  isError: false,
+  errorMsg: "",
 };
 
 export const homeSlice = createSlice({
@@ -19,18 +22,35 @@ export const homeSlice = createSlice({
     decrement: (state) => {
       state.value -= 1;
     },
+    setError: (state, action) => {
+      console.log("action.payload", action.payload);
+      if (action?.payload?.isError) {
+        Swal.fire({
+          toast: true,
+          position: "top-end",
+          title: "Error!",
+          text: action?.payload?.errorMsg || "Do you want to continue",
+          icon: "error",
+        }).then((res) => {
+          if (res) {
+            state.isError = false;
+            state.errorMsg = "";
+            window.location.reload();
+          }
+        });
+      }
+    },
     incrementByAmount: (state, action) => {
       state.value += action.payload;
     },
     userData: (state, action) => {
-      console.log("action.payload", action.payload);
-      state.user = action.payload;
+      state.user = action.payload || {};
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, userData, incrementByAmount } =
+export const { increment, decrement, setError, userData, incrementByAmount } =
   homeSlice.actions;
 
 export default homeSlice.reducer;

@@ -1,0 +1,22 @@
+/* NotFound.css */
+.not-found-container {
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  height: 70vh;
+  justify-content: center;
+}
+
+h1 {
+  color: #f00; /* Optional: Change the color as desired */
+  font-size: 25px;
+}
+
+p {
+  color: #555;
+}

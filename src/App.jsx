@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Shop from "./Pages/Shop";
@@ -12,6 +12,7 @@ import {
   Route,
   useLocation,
   useNavigate,
+  Navigate,
 } from "react-router-dom";
 import Footer from "./Components/Footer/Footer";
 import men_banner from "./Components/Assets/banner_mens.png";
@@ -23,12 +24,14 @@ import axios from "axios";
 import Login from "./Pages/LoginSignUp/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { userData } from "./State/home.slice";
+import NotFound from "./Components/PageNotFound/NotFound";
 
 const Wrap = ({ children }) => {
   return <div style={{ minHeight: "65vh" }}>{children}</div>;
 };
 
 function App() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state?.home);
   const [apiCartData, setApiCartData] = useState([]);
@@ -81,21 +84,29 @@ function App() {
     }
   }, []);
 
+  const PrivateRoute = ({ path, element }) => {
+    return localStorage?.getItem("token") === user?.token ? (
+      <Route path={path} element={element} />
+    ) : (
+      <Navigate to="/login" />
+    );
+  };
+
   return (
-    <BrowserRouter>
+    <React.Fragment>
       <Navbar />
       <Wrap>
         {" "}
         <Routes>
-          {!localStorage?.getItem("token") ? (
-            <>
-              <Route path="/" element={<Login />} />
-              <Route path="/register" element={<RegisterPage />} />
-            </>
-          ) : (
+          {localStorage?.getItem("token") &&
+          localStorage?.getItem("token") === user?.token ? (
             <>
               <Route path="/" element={<Shop />} />
-              <Route path="/create" element={<CreateItem />} />
+              ...(
+              {user?.email === "sohebs5050@gmail.com" && (
+                <Route path="/create" element={<CreateItem />} />
+              )}
+              )
               <Route
                 path="/mens"
                 element={<ShopCategory banner={men_banner} category="men" />}
@@ -114,13 +125,20 @@ function App() {
                 <Route path="/product/:productID" element={<Product />} />
               </Route>
               <Route path="/cart" element={<Cart />} />
+              <Route path="/*" element={<NotFound />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Login />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/*" element={<NotFound />} />
             </>
           )}
         </Routes>
       </Wrap>
 
       <Footer />
-    </BrowserRouter>
+    </React.Fragment>
   );
 }
 

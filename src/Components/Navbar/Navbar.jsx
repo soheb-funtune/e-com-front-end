@@ -6,6 +6,8 @@ import logo from "../Assets/logo.png";
 import cartIcon from "../Assets/cart_icon.png";
 import dropdown_icon from "../Assets/dropdown_icon.png";
 import { useGetContext } from "../../Context/ShopContext/ShopContext";
+import Swal from "sweetalert2";
+import { userData } from "../../State/home.slice";
 
 const Navbar = () => {
   let location = useLocation();
@@ -25,8 +27,20 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage?.removeItem("token");
-    // navigate("/");
-    window.location.reload();
+    localStorage?.removeItem("user");
+    userData({});
+    Swal.fire({
+      toast: true,
+      position: "top-end",
+      title: "Info !",
+      text: "Successfully Loged Out",
+      icon: "info",
+    }).then((res) => {
+      if (res) {
+        navigate("/");
+        window.location.reload();
+      }
+    });
   };
   return (
     <div className="navbar">
