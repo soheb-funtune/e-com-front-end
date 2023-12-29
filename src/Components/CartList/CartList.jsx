@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useGetContext } from "../../Context/ShopContext/ShopContext";
+import { useSelector } from "react-redux";
 import "./CartList.css";
+
 const CartList = () => {
+  const { cartItems } = useSelector((state) => state.home);
   const [cartData, setCartData] = useState([]);
-  const { cartItems, increaseCartItem, descreaseCartItem, removeItem } =
-    useGetContext();
+  const { increaseCartItem, descreaseCartItem, removeItem } = useGetContext();
   console.log(cartItems?.data);
   // useEffect(() => {
   //   const cartRes = [];

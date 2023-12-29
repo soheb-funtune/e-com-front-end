@@ -40,10 +40,10 @@ restClient.interceptors.response.use(
   },
   function (error) {
     const err = error.response;
-    const ls = new SecureLS();
+    // const ls = new SecureLS();
     if (err.status === 401) {
-      ls.remove("token");
-      ls.remove("user");
+      localStorage.remove("token");
+      localStorage.remove("user");
       window.history.go("/");
     }
     return Promise.reject(error);
@@ -70,15 +70,15 @@ const httpClient = async (
     const queryString = queryString.stringify(options.queryParams);
     fullPath = `${fullPath}?${queryString}`;
   }
-
-  // const token = ls?.get("token");
+  //   const ls = new SecureLS();
+  const token = localStorage?.getItem("token");
   restClient.defaults.headers.common[
     "lanninsport"
   ] = `NThmZjc0MGMzZGI1YjY3NDAyZjZlY2Y3OGQ4ODgyZjIjZmM4OTllZjc0NzBlZTY3MDUyZWQ5MmYwZjkwYTI2MTk=`;
   restClient.defaults.headers.common["Accept"] = `application/json`;
-  // if (token) {
-  //   restClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  // }
+  if (token) {
+    restClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
   if (encryptionHeader) {
     restClient.defaults.headers.common["x-encryption"] = `keep`;
   } else {

@@ -8,6 +8,10 @@ const initialState = {
   isError: false,
   errorMsg: "",
   allItems: null,
+  cartItems: {
+    totalCount: 0,
+    data: [],
+  },
   reduxsetup: null,
   error: "",
 };
@@ -58,6 +62,10 @@ export const homeSlice = createSlice({
     setAllItems: (state, action) => {
       state.allItems = action.payload || [];
     },
+    setCartItems: (state, action) => {
+      console.log(action.payload);
+      state.cartItems = action.payload;
+    },
     error: (state, action) => {
       state.error = action.payload || "";
     },
@@ -73,6 +81,7 @@ export const {
   incrementByAmount,
   reduxSetup,
   setAllItems,
+  setCartItems,
   error,
 } = homeSlice.actions;
 
@@ -132,6 +141,95 @@ export const getItems = () => {
   return async (dispatch) => {
     try {
       actionStructure(dispatch, setAllItems, error, services.getAllItemApi);
+    } catch (err) {
+      dispatch(error("Something went wrong"));
+      console.error("Error", err);
+    }
+  };
+};
+
+// fetching CartItems
+export const getCartItems = (userId) => {
+  return async (dispatch) => {
+    try {
+      // actionStructure(dispatch, userData, error, services.login, data);
+      const { success, data, errors, message } =
+        await services.getAllCartItemApi(userId);
+      console.log("getCartItems", data, errors);
+      if (data?.data?.data || success) {
+        if (data?.data?.data?.length > 0) {
+          const res = data?.data?.data?.reduce((acc, cur) => {
+            return acc + cur?.quantity;
+          }, 0);
+          console.log("all cart data :", data?.data?.data, res);
+          res &&
+            dispatch(
+              setCartItems({
+                totalCount: res,
+                data: data?.data?.data,
+              })
+            );
+        }
+      } else {
+        dispatch(error(errors || message));
+      }
+    } catch (err) {
+      dispatch(error("Something went wrong"));
+      console.error("Error", err);
+    }
+  };
+};
+// Remove Cart Item
+export const removeCartItemAPI = (id) => {
+  return async (dispatch) => {
+    try {
+      let user = JSON.parse(localStorage.getItem("user"));
+      const { success, data, errors, message } =
+        await services.removeCartItemApi(user?._id, id);
+      console.log("removeCartItemAPI", data, errors);
+      if (data?.data || success) {
+      } else {
+        dispatch(error(errors || message));
+      }
+    } catch (err) {
+      dispatch(error("Something went wrong"));
+      console.error("Error", err);
+    }
+  };
+};
+
+//  AddTo Cart APi
+export const addCartItemAPI = (singleItem) => {
+  return async (dispatch) => {
+    try {
+      let user = JSON.parse(localStorage.getItem("user"));
+      const { success, data, errors, message } = await services.addCartItemApi(
+        user?._id,
+        singleItem
+      );
+      console.log("adddCartItemAPI", data, errors);
+      if (data?.data || success) {
+      } else {
+        dispatch(error(errors || message));
+      }
+    } catch (err) {
+      dispatch(error("Something went wrong"));
+      console.error("Error", err);
+    }
+  };
+};
+//  Update Cart Quantity APi
+export const updateCartQuantityAPI = (_id, quantity) => {
+  return async (dispatch) => {
+    try {
+      let user = JSON.parse(localStorage.getItem("user"));
+      const { success, data, errors, message } =
+        await services.updateCartQuantityAPI(user?._id, _id, quantity);
+      console.log("adddCartItemAPI", data, errors);
+      if (data?.data || success) {
+      } else {
+        dispatch(error(errors || message));
+      }
     } catch (err) {
       dispatch(error("Something went wrong"));
       console.error("Error", err);

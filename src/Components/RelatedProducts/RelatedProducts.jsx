@@ -13,7 +13,7 @@ const RelatedProducts = ({ restProducts }) => {
           <Item
             width={true}
             key={i}
-            id={item.id}
+            id={item?._id || item?.id}
             name={item?.name}
             image={item?.image}
             new_price={item?.new_price}

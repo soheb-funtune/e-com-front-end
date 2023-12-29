@@ -5,10 +5,9 @@ import { useSelector } from "react-redux";
 import "./Cart.css";
 import { useGetContext } from "../../Context/ShopContext/ShopContext";
 const Cart = () => {
-  const { user } = useSelector((state) => state?.home);
+  const { user, cartItems } = useSelector((state) => state?.home);
   console.log({ user });
   const [total, setTotal] = useState();
-  const { cartItems, addToCartFun } = useGetContext();
 
   useEffect(() => {
     let total = 0;

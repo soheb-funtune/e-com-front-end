@@ -8,12 +8,14 @@ import dropdown_icon from "../Assets/dropdown_icon.png";
 import { useGetContext } from "../../Context/ShopContext/ShopContext";
 import Swal from "sweetalert2";
 import { userData } from "../../State/home.slice";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const { cartItems } = useSelector((state) => state.home);
   let location = useLocation();
   const navigate = useNavigate();
   console.log(location?.pathname);
-  const { cartItems } = useGetContext();
+  // const { cartItems } = useGetContext();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [menu, setMenu] = useState("shop");
 
@@ -29,18 +31,8 @@ const Navbar = () => {
     localStorage?.removeItem("token");
     localStorage?.removeItem("user");
     userData({});
-    // Swal.fire({
-    //   toast: true,
-    //   position: "top-end",
-    //   title: "",
-    //   text: "Successfully Loged Out",
-    //   icon: "info",
-    // }).then((res) => {
-    //   if (res) {
     navigate("/");
     window.location.reload();
-    //   }
-    // });
   };
   return (
     <div className="navbar">

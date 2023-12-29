@@ -23,7 +23,8 @@ import CreateItem from "./Pages/CreateItem/CreateItem";
 import axios from "axios";
 import Login from "./Pages/LoginSignUp/Login";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems, userData } from "./State/home.slice";
+import { setCartItems } from "./State/home.slice";
+import { getItems, getCartItems, userData } from "./State/home.slice";
 import NotFound from "./Components/PageNotFound/NotFound";
 import ContactPage from "./Pages/ContactPage/ContactPage";
 
@@ -36,39 +37,44 @@ function App() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state?.home);
   const [apiCartData, setApiCartData] = useState([]);
-  const { setAllItems, setCartItems, addToCartFun } = useGetContext();
+  // const { setAllItems, addToCartFun } = useGetContext();
+
+  // useEffect(() => {
+  //   if (apiCartData?.length > 0) {
+  //     const res = apiCartData?.reduce((acc, cur) => {
+  //       return acc + cur?.quantity;
+  //     }, 0);
+  //     console.log("all cart data :", apiCartData, res);
+  //     res &&
+  //       dispatch(
+  //         setCartItems({
+  //           totalCount: res,
+  //           data: apiCartData,
+  //         })
+  //       );
+  //   }
+  // }, [apiCartData]);
 
   useEffect(() => {
-    if (apiCartData?.length > 0) {
-      const res = apiCartData?.reduce((acc, cur) => {
-        return acc + cur?.quantity;
-      }, 0);
-      console.log("all cart data :", apiCartData, res);
-      res &&
-        setCartItems({
-          totalCount: res,
-          data: apiCartData,
-        });
-    }
-  }, [apiCartData]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get(`http://localhost:4000/user/cart-items?user_id=${user?._id}`)
-        .then((res) => {
-          console.log(res.data);
-          setApiCartData(res?.data?.data);
-        })
-        .catch((err) => console.log({ err }));
-    };
-    if (user?._id) {
-      fetchData();
+    // const fetchData = async () => {
+    //   await axios
+    //     .get(`http://localhost:4000/user/cart-items?user_id=${user?._id}`)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       setApiCartData(res?.data?.data);
+    //     })
+    //     .catch((err) => console.log({ err }));
+    // };
+    if (localStorage?.getItem("token") == user?.token) {
+      dispatch(getItems());
+      dispatch(getCartItems(user?._id));
+      // fetchData();
+    } else {
+      navigate("/");
     }
   }, [user]);
 
   useEffect(() => {
-    dispatch(getItems());
     // const fetchData = async () => {
     //   await axios
     //     .get("http://localhost:4000/getItems")
