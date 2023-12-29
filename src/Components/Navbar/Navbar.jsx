@@ -29,18 +29,18 @@ const Navbar = () => {
     localStorage?.removeItem("token");
     localStorage?.removeItem("user");
     userData({});
-    Swal.fire({
-      toast: true,
-      position: "top-end",
-      title: "Info !",
-      text: "Successfully Loged Out",
-      icon: "info",
-    }).then((res) => {
-      if (res) {
-        navigate("/");
-        window.location.reload();
-      }
-    });
+    // Swal.fire({
+    //   toast: true,
+    //   position: "top-end",
+    //   title: "",
+    //   text: "Successfully Loged Out",
+    //   icon: "info",
+    // }).then((res) => {
+    //   if (res) {
+    navigate("/");
+    window.location.reload();
+    //   }
+    // });
   };
   return (
     <div className="navbar">
