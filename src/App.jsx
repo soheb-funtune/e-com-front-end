@@ -23,8 +23,9 @@ import CreateItem from "./Pages/CreateItem/CreateItem";
 import axios from "axios";
 import Login from "./Pages/LoginSignUp/Login";
 import { useDispatch, useSelector } from "react-redux";
-import { userData } from "./State/home.slice";
+import { getItems, userData } from "./State/home.slice";
 import NotFound from "./Components/PageNotFound/NotFound";
+import ContactPage from "./Pages/ContactPage/ContactPage";
 
 const Wrap = ({ children }) => {
   return <div style={{ minHeight: "65vh" }}>{children}</div>;
@@ -67,30 +68,23 @@ function App() {
   }, [user]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get("http://localhost:4000/getItems")
-        .then((res) => res.data)
-        .then((res) => {
-          console.log({ res });
-          setAllItems(res);
-        })
-        .catch((err) => console.error(err));
-    };
-    fetchData();
+    dispatch(getItems());
+    // const fetchData = async () => {
+    //   await axios
+    //     .get("http://localhost:4000/getItems")
+    //     .then((res) => res.data)
+    //     .then((res) => {
+    //       console.log({ res });
+    //       setAllItems(res);
+    //     })
+    //     .catch((err) => console.error(err));
+    // };
+    // fetchData();
     const user = JSON.parse(localStorage.getItem("user"));
     if (user?.token) {
       dispatch(userData(user));
     }
   }, []);
-
-  const PrivateRoute = ({ path, element }) => {
-    return localStorage?.getItem("token") === user?.token ? (
-      <Route path={path} element={element} />
-    ) : (
-      <Navigate to="/login" />
-    );
-  };
 
   return (
     <React.Fragment>
@@ -125,6 +119,7 @@ function App() {
                 <Route path="/product/:productID" element={<Product />} />
               </Route>
               <Route path="/cart" element={<Cart />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route path="/*" element={<NotFound />} />
             </>
           ) : (
@@ -137,7 +132,8 @@ function App() {
         </Routes>
       </Wrap>
 
-      <Footer />
+      {localStorage?.getItem("token") &&
+        localStorage?.getItem("token") === user?.token && <Footer />}
     </React.Fragment>
   );
 }

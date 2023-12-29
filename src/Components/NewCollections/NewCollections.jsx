@@ -2,15 +2,20 @@ import React, { useEffect, useState } from "react";
 import "./new-collection.css";
 import newCollections from "../Assets/new_collections";
 import Item from "../Items/Item";
-import axios from "axios";
-import { useGetContext } from "../../Context/ShopContext/ShopContext";
+import { useSelector } from "react-redux";
+import _ from "lodash";
 
 const NewCollections = () => {
   const [newCollection, setNewCollection] = useState(newCollections);
-  const { setAllItems, allItems } = useGetContext();
+  const { allItems } = useSelector((state) => state?.home);
 
   useEffect(() => {
-    setNewCollection([...allItems.reverse()]);
+    if (allItems && allItems.length > 0) {
+      console.log("allItems");
+      let reversedItems = [...allItems].reverse(); // Create a copy before reversing
+      let res = _.chunk(reversedItems, 8)?.[0];
+      setNewCollection(res?.length > 0 ? res : allItems);
+    }
   }, [allItems]);
   return (
     <div id="newcollection" className="new-collections">

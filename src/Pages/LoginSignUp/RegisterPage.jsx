@@ -78,10 +78,10 @@ const RegisterPage = () => {
               Login
             </Link>
           </p>
-          <div className="login-signup-agree">
+          {/* <div className="login-signup-agree">
             <input type="checkbox" />
             <p>By continuing, i agree to the terms of use & privacy policy.</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </form>

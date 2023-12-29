@@ -6,26 +6,31 @@ import Breadcrum from "../Components/Breadcrum/Breadcrum";
 import DescriptionBox from "../Components/DescriptionBox/DescriptionBox";
 import RelatedProducts from "../Components/RelatedProducts/RelatedProducts";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Product = () => {
+  const { allItems } = useSelector((state) => state.home);
   const [product, setProduct] = useState();
   const [restProducts, setRestProducts] = useState();
   const { productID } = useParams();
 
   const { AllProducts } = useGetContext();
   useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get(`http://localhost:4000/getItems?_id=${productID}`)
-        .then((res) => res.data)
-        .then((res) => {
-          console.log({ res });
-          setProduct(res);
-        })
-        .catch((err) => console.error(err));
-    };
-    fetchData();
-  }, []);
+    // const fetchData = async () => {
+    //   await axios
+    //     .get(`http://localhost:4000/getItems?_id=${productID}`)
+    //     .then((res) => res.data)
+    //     .then((res) => {
+    //       console.log({ res });
+    //       setProduct(res);
+    //     })
+    //     .catch((err) => console.error(err));
+    // };
+    // fetchData();
+    if (productID && allItems) {
+      setProduct(allItems?.find((item) => item?._id === productID));
+    }
+  }, [productID, allItems]);
 
   // useEffect(() => {
   //   let res = AllProducts?.find((item) => item?._id === Number(productID));

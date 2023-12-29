@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./popular.css";
 import productData from "../Assets/data";
 import Item from "../Items/Item";
-import axios from "axios";
-import { useGetContext } from "../../Context/ShopContext/ShopContext";
+import { useSelector } from "react-redux";
+
 const Popular = () => {
   const [popularData, setPopularData] = useState(productData);
-  const { allItems } = useGetContext();
+  const { allItems } = useSelector((state) => state?.home);
 
   useEffect(() => {
     const res = allItems?.filter((item) => item?.category == "women");

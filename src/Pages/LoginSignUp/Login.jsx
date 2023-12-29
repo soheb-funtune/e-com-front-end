@@ -2,16 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./LoginSignUp.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { userData } from "../../State/home.slice";
+import { userData, setError, LoginUser } from "../../State/home.slice";
 import { useSelector, useDispatch } from "react-redux";
-import { setError } from "../../State/home.slice";
 import Swal from "sweetalert2";
 
 const showMessageFun = (text) => {
   Swal.fire({
     toast: true,
     position: "top-end",
-    title: "Info !",
+    title: "",
     text: text,
     icon: "info",
   }).then((res) => {
@@ -30,34 +29,41 @@ const Login = () => {
     e.preventDefault();
 
     console.log("handleRegister Clicked", loginData);
-    const fetchData = async () => {
-      await axios
-        .post("http://localhost:4000/user/login-user", loginData)
-        .then((res) => {
-          localStorage.setItem("token", res?.data?.token);
-          localStorage.setItem("user", JSON.stringify(res?.data));
-          userData(res?.data);
-          if (res?.data?.token && res?.data?.email) {
-            showMessageFun(res?.data?.message);
-          }
-          console.log(res.data);
-        })
-        .catch((err) => {
-          if (err?.response?.data) {
-            dispatch(
-              setError({
-                isError: true,
-                errorMsg: err?.response?.data?.message,
-              })
-            );
+    dispatch(LoginUser(loginData));
+    // const fetchData = async () => {
+    //   await axios
+    //     .post("http://localhost:4000/user/login-user", loginData)
+    //     .then((res) => {
+    //       localStorage.setItem("token", res?.data?.token);
+    //       localStorage.setItem("user", JSON.stringify(res?.data));
+    //       userData(res?.data);
+    //       if (res?.data?.token && res?.data?.email) {
+    //         showMessageFun(res?.data?.message);
+    //       }
+    //       console.log(res.data);
+    //     })
+    //     .catch((err) => {
+    //       if (err?.response?.data) {
+    //         dispatch(
+    //           setError({
+    //             isError: true,
+    //             errorMsg: err?.response?.data?.message,
+    //           })
+    //         );
 
-            console.log(err?.response?.data);
-          }
-        });
-    };
-    if (loginData?.email && loginData?.password) {
-      fetchData();
-    }
+    //         console.log(err?.response?.data);
+    //       }
+    //     });
+    // };
+    // if (loginData?.email && loginData?.password) {
+    //   fetchData();
+    // } else {
+    //   Swal.fire({
+    //     title: "Empty Fields",
+    //     text: "All Fields are required.",
+    //     icon: "info",
+    //   });
+    // }
   };
   // useEffect(() => {
   //   if (user?.token) {

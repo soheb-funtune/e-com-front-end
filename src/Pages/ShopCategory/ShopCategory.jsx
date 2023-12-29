@@ -3,43 +3,56 @@ import "./ShopCategory.css";
 import dropdown_icon from "../../Components/Assets/dropdown_icon.png";
 import { useGetContext } from "../../Context/ShopContext/ShopContext";
 import Item from "../../Components/Items/Item";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import _ from "lodash";
 
 const ShopCategory = ({ banner, category }) => {
   const [sortBy, setSortBy] = useState("");
   const { AllProducts } = useGetContext();
+  const { allItems } = useSelector((state) => state.home);
   const [categoryArray, setCategoryArray] = useState([]);
   const [remainingItems, setRemainingItems] = useState([]);
 
   useEffect(() => {
     setCategoryArray([]);
 
-    const fetchData = async () => {
-      await axios
-        .get(`http://localhost:4000/getItems?sort=${category}`)
-        .then((res) => res.data)
-        .then((res) => {
-          console.log({ res });
-          const chunks = _.chunk(
-            sortBy
-              ? _.sortBy(res, [
-                  function (o) {
-                    return o?.[sortBy];
-                  },
-                ])
-              : Array.from(new Set([...res])),
-            8
-          );
+    // const fetchData = async () => {
+    //   await axios
+    //     .get(`http://localhost:4000/getItems?sort=${category}`)
+    //     .then((res) => res.data)
+    //     .then((res) => {
+    //       console.log({ res });
+    //       const chunks = _.chunk(
+    //         sortBy
+    //           ? _.sortBy(allItems, [
+    //               function (o) {
+    //                 return o?.[sortBy];
+    //               },
+    //             ])
+    //           : Array.from(new Set([...res])),
+    //         8
+    //       );
 
-          setCategoryArray(chunks[0]);
-          setRemainingItems(chunks[1]);
-        })
-        .catch((err) => console.error(err));
-    };
-    fetchData();
-  }, [category]);
+    //       setCategoryArray(chunks[0]);
+    //       setRemainingItems(chunks[1]);
+    //     })
+    //     .catch((err) => console.error(err));
+    // };
+    // fetchData();
+    if (allItems?.length > 0) {
+      const chunks = _.chunk(
+        category
+          ? allItems?.filter((item) => item?.category === category)
+          : Array.from(new Set([...allItems])),
+        8
+      );
+
+      console.log(allItems, chunks[0], chunks[1]);
+      setCategoryArray(chunks[0]);
+      setRemainingItems(chunks[1]);
+    }
+  }, [category, allItems]);
   useEffect(() => {
     if (sortBy) {
       const res = _.sortBy(categoryArray, [

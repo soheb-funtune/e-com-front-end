@@ -12,6 +12,7 @@
   flex-direction: column;
   gap: 30px;
   min-width: 300px;
+  margin: 0px;
 }
 
 .login-signup-container h1 {
