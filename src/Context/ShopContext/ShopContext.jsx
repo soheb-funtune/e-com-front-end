@@ -116,7 +116,6 @@ const ShopContextProdider = ({ children }) => {
       value={{
         AllProducts,
         cartItems,
-
         handleAPICart,
         addToCartFun,
         increaseCartItem,

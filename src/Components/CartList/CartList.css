@@ -70,7 +70,26 @@
 }
 
 .quantity-handler button:last-child {
-  background: #ff4141;
+  background: orange;
+}
+
+.button-div {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.button-div button {
+  padding: 7px 20px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  border-radius: 0px;
+  background: linear-gradient(to right bottom, #ff4141, orange);
+  outline: none;
+  border: 0px;
+  color: white;
+  transition: all ease-in-out 0.3s;
+}
+.button-div button:active {
+  transform: scale(1.2);
 }
 
 @media (max-width: 600px) {

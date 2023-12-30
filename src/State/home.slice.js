@@ -12,6 +12,7 @@ const initialState = {
     totalCount: 0,
     data: [],
   },
+  razorpayData: null,
   reduxsetup: null,
   error: "",
 };
@@ -66,6 +67,10 @@ export const homeSlice = createSlice({
       console.log(action.payload);
       state.cartItems = action.payload;
     },
+    setRezorpayData: (state, action) => {
+      console.log(action.payload);
+      state.razorpayData = action.payload;
+    },
     error: (state, action) => {
       state.error = action.payload || "";
     },
@@ -82,6 +87,7 @@ export const {
   reduxSetup,
   setAllItems,
   setCartItems,
+  setRezorpayData,
   error,
 } = homeSlice.actions;
 
@@ -218,6 +224,7 @@ export const addCartItemAPI = (singleItem) => {
     }
   };
 };
+
 //  Update Cart Quantity APi
 export const updateCartQuantityAPI = (_id, quantity) => {
   return async (dispatch) => {
@@ -235,4 +242,28 @@ export const updateCartQuantityAPI = (_id, quantity) => {
       console.error("Error", err);
     }
   };
+};
+
+//  AddTo Cart APi
+export const razorpayAPI = async (singleItem) => {
+  // return async (dispatch) => {
+  try {
+    let user = JSON.parse(localStorage.getItem("user"));
+    const { success, data, errors, message } = await services.rezorpayAPI(
+      user?._id,
+      singleItem
+    );
+    console.log("razorpayAPI", data, errors);
+    if (data?.data || success) {
+      // dispatch(setRezorpayData(data?.data));
+      return data?.data;
+    } else {
+      // dispatch(error(errors || message));
+      return errors;
+    }
+  } catch (err) {
+    // dispatch(error("Something went wrong"));
+    console.error("Error", err);
+  }
+  // };
 };
