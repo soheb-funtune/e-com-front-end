@@ -13,6 +13,8 @@ const initialState = {
     data: [],
   },
   razorpayData: null,
+  paymentDetails: null,
+  paymentErrors: null,
   reduxsetup: null,
   error: "",
 };
@@ -71,6 +73,14 @@ export const homeSlice = createSlice({
       console.log(action.payload);
       state.razorpayData = action.payload;
     },
+    setpaymentDetails: (state, action) => {
+      console.log(action.payload);
+      state.paymentDetails = action.payload;
+    },
+    setpaymentField: (state, action) => {
+      console.log(action.payload);
+      state.paymentErrors = action.payload;
+    },
     error: (state, action) => {
       state.error = action.payload || "";
     },
@@ -88,6 +98,8 @@ export const {
   setAllItems,
   setCartItems,
   setRezorpayData,
+  setpaymentDetails,
+  setpaymentField,
   error,
 } = homeSlice.actions;
 
@@ -244,15 +256,13 @@ export const updateCartQuantityAPI = (_id, quantity) => {
   };
 };
 
-//  AddTo Cart APi
+//  order checkout API Razorpay
 export const razorpayAPI = async (singleItem) => {
   // return async (dispatch) => {
   try {
     let user = JSON.parse(localStorage.getItem("user"));
-    const { success, data, errors, message } = await services.rezorpayAPI(
-      user?._id,
-      singleItem
-    );
+    const { success, data, errors, message } =
+      await services.rezorpayCheckoutAPI(user?._id, singleItem);
     console.log("razorpayAPI", data, errors);
     if (data?.data || success) {
       // dispatch(setRezorpayData(data?.data));
@@ -266,4 +276,24 @@ export const razorpayAPI = async (singleItem) => {
     console.error("Error", err);
   }
   // };
+};
+//  Payemnt varification API Razorpay
+export const rzPaymentVarificationAPI = (IDs) => {
+  return async (dispatch) => {
+    try {
+      let user = JSON.parse(localStorage.getItem("user"));
+      const { success, data, errors, message } =
+        await services.rzPaymentVarificationAPI(user?._id, IDs);
+
+      console.log("payment varification", data, errors);
+      if (data?.data || success) {
+        dispatch(setpaymentDetails(data?.data?.data));
+      } else {
+        dispatch(error(errors || message));
+      }
+    } catch (err) {
+      dispatch(error("Something went wrong"));
+      console.error("Error", err);
+    }
+  };
 };

@@ -14,7 +14,6 @@ const Product = () => {
   const [restProducts, setRestProducts] = useState();
   const { productID } = useParams();
 
-  const { AllProducts } = useGetContext();
   useEffect(() => {
     if (productID && allItems) {
       setProduct(allItems?.find((item) => item?._id === productID));
@@ -31,15 +30,6 @@ const Product = () => {
     }
   }, [product, allItems]);
 
-  // useEffect(() => {
-  //   let res = AllProducts?.find((item) => item?._id === Number(productID));
-  //   let restItem = AllProducts?.filter(
-  //     (item) =>
-  //       item?.id !== Number(productID) && res?.category == item?.category
-  //   );
-  //   setRestProducts(restItem);
-  //   setProduct(res);
-  // }, [productID, AllProducts]);
   return (
     <div>
       <Breadcrum {...product} />

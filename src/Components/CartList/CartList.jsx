@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useGetContext } from "../../Context/ShopContext/ShopContext";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { razorpayAPI } from "../../State/home.slice";
+import {
+  razorpayAPI,
+  rzPaymentVarificationAPI,
+  setpaymentField,
+} from "../../State/home.slice";
 import "./CartList.css";
 
 const CartList = () => {
@@ -45,8 +49,7 @@ const CartList = () => {
       description: "Buying Some Clothes from Soheb's SHOPPER",
       image: "http://localhost:4000/Images/image_1702144533935.jpg",
       order_id: resData?.data?.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      id: resData?.data?.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
+      // callback_url: `http://localhost:4000/payment/rz-varification?order_id=${resData?.data?.id}`,
       prefill: {
         //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
         name: "Sayyad Soheb", //your customer's name
@@ -54,20 +57,35 @@ const CartList = () => {
         contact: "9604376207", //Provide the customer's phone number for better conversion rates
       },
       handler: function (response) {
-        console.log(response);
+        console.log({ response });
         // Handle the successful payment response
-        navigate("/");
+        dispatch(
+          rzPaymentVarificationAPI({ ...response, order_id: resData?.data?.id })
+        );
+        // http://localhost:4000/payment/varification
+        navigate("/payment-success");
       },
-      // notes: {
-      //   address: "Razorpay Corporate Office",
-      // },
-      // theme: {
-      //   color: "#3399cc",
-      // },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "orange",
+      },
     };
     // if (resData?.data) {
     var paymentOption = new window.Razorpay(options);
     paymentOption.open();
+    paymentOption.on("payment.failed", function (response) {
+      dispatch(setpaymentField(response.error));
+      navigate("/payment-failed");
+      // alert(response.error.code);
+      // alert(response.error.description);
+      // alert(response.error.source);
+      // alert(response.error.step);
+      // alert(response.error.reason);
+      // alert(response.error.metadata.order_id);
+      // alert(response.error.metadata.payment_id);
+    });
     // }
   };
 

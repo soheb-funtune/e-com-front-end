@@ -27,6 +27,8 @@ import { setCartItems } from "./State/home.slice";
 import { getItems, getCartItems, userData } from "./State/home.slice";
 import NotFound from "./Components/PageNotFound/NotFound";
 import ContactPage from "./Pages/ContactPage/ContactPage";
+import PaymentSuccess from "./Pages/payment-success/payment-success";
+import PaymentFailed from "./Pages/payment-failed/payment-failed";
 
 const Wrap = ({ children }) => {
   return <div style={{ minHeight: "65vh" }}>{children}</div>;
@@ -126,6 +128,8 @@ function App() {
               </Route>
               <Route path="/cart" element={<Cart />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/payment-success" element={<PaymentSuccess />} />
+              <Route path="/payment-failed" element={<PaymentFailed />} />
               <Route path="/*" element={<NotFound />} />
             </>
           ) : (
