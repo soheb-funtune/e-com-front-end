@@ -29,6 +29,7 @@ import NotFound from "./Components/PageNotFound/NotFound";
 import ContactPage from "./Pages/ContactPage/ContactPage";
 import PaymentSuccess from "./Pages/payment-success/payment-success";
 import PaymentFailed from "./Pages/payment-failed/payment-failed";
+import MuiPrac from "./Components/MuiPrac/MuiPrac";
 
 const Wrap = ({ children }) => {
   return <div style={{ minHeight: "65vh" }}>{children}</div>;
@@ -135,6 +136,7 @@ function App() {
           ) : (
             <>
               <Route path="/" element={<Login />} />
+              <Route path="/mui" element={<MuiPrac />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/*" element={<NotFound />} />
             </>
