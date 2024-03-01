@@ -9,7 +9,14 @@ const NewsLetter = () => {
 
   const handleCLick = () => {
     console.log({ email });
-    dispatch(sendEmailTOUser({ email }));
+    dispatch(
+      sendEmailTOUser({
+        to: email,
+        subject: "Email Subscribed ! ",
+        text: "Email Registration Varification By Sendin Email From SHOPPER e-commerce",
+      })
+    );
+    setEmail("");
   };
   return (
     <div className="news-letter">

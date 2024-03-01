@@ -46,12 +46,12 @@
   padding: 11px 15px;
   height: 100%;
   font-size: 16px;
+  margin-bottom: 0px;
+  border: none;
   border-radius: 10px 0px 0px 10px;
-  /* border-right: none;
-  border: none; */
 }
 .news-letter div input:focus-visible {
-  /* border: none; */
+  border: none !important;
 }
 .news-letter div button {
   padding: 15px;
