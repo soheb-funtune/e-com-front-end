@@ -30,46 +30,7 @@ const Login = () => {
 
     console.log("handleRegister Clicked", loginData);
     dispatch(LoginUser(loginData));
-    // const fetchData = async () => {
-    //   await axios
-    //     .post("http://localhost:4000/user/login-user", loginData)
-    //     .then((res) => {
-    //       localStorage.setItem("token", res?.data?.token);
-    //       localStorage.setItem("user", JSON.stringify(res?.data));
-    //       userData(res?.data);
-    //       if (res?.data?.token && res?.data?.email) {
-    //         showMessageFun(res?.data?.message);
-    //       }
-    //       console.log(res.data);
-    //     })
-    //     .catch((err) => {
-    //       if (err?.response?.data) {
-    //         dispatch(
-    //           setError({
-    //             isError: true,
-    //             errorMsg: err?.response?.data?.message,
-    //           })
-    //         );
-
-    //         console.log(err?.response?.data);
-    //       }
-    //     });
-    // };
-    // if (loginData?.email && loginData?.password) {
-    //   fetchData();
-    // } else {
-    //   Swal.fire({
-    //     title: "Empty Fields",
-    //     text: "All Fields are required.",
-    //     icon: "info",
-    //   });
-    // }
   };
-  // useEffect(() => {
-  //   if (user?.token) {
-  //     navigate("/");
-  //   }
-  // }, [user]);
 
   return (
     <div className="login-signup">

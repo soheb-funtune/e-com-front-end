@@ -30,12 +30,12 @@ h1 {
   color: #333; /* Set a color for the heading */
 }
 
-form {
+/* form {
   display: flex;
   flex-direction: column;
   max-width: 400px;
   margin: auto;
-}
+} */
 
 label {
   margin-bottom: 8px;

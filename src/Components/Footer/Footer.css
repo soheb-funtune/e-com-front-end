@@ -23,8 +23,12 @@
   display: flex;
   list-style: none;
   gap: 20px;
+  padding: 0px;
   color: #252525;
   flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .footer-links li {
   cursor: pointer;

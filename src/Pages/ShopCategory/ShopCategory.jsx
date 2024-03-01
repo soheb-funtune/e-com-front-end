@@ -70,7 +70,7 @@ const ShopCategory = ({ banner, category }) => {
       <img src={banner} alt={banner} />
       <div className="sort-and-count">
         <div className="shpcategory-indexsort">
-          <p>
+          <p style={{ textAlign: "left" }}>
             <span>Showing 1-{categoryArray?.length}</span> out of{" "}
             {remainingItems?.length
               ? categoryArray?.length + remainingItems?.length

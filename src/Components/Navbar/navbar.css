@@ -1,5 +1,6 @@
 .navbar {
   display: flex;
+  align-items: center;
   justify-content: space-around;
   padding: 16px;
   box-shadow: 0px 1px 3px -2px black;
@@ -54,7 +55,7 @@
   align-items: center;
   gap: 15px;
 }
-.nav-login-cart button {
+.nav-login-cart .logout-btn {
   padding: 1px 18px;
   display: flex;
   justify-content: center;
@@ -69,9 +70,9 @@
   cursor: pointer;
   text-decoration: none;
 }
-.nav-login-cart button:active,
-.nav-login-cart button:hover,
-.nav-login-cart button:focus {
+.nav-login-cart .logout-btn:active,
+.nav-login-cart .logout-btn:hover,
+.nav-login-cart .logout-btn:focus {
   color: #ff4141;
   border-color: #ff4141;
 }
@@ -155,15 +156,19 @@
     gap: 10px;
     padding: 0px;
   }
+  .mobile-menu {
+    display: block;
+  }
   .nav-menu li {
     font-size: 13px;
   }
   .nav-login-cart {
     gap: 10px;
   }
-  .nav-login-cart button {
+  .nav-login-cart .logout-btn {
     padding: 5px 10px;
     font-size: 13px;
+    display: none;
   }
   .nav-login-cart a img {
     width: auto;
