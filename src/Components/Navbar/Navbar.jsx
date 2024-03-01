@@ -4,12 +4,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import logo from "../Assets/logo.png";
 import cartIcon from "../Assets/cart_icon.png";
-import dropdown_icon from "../Assets/dropdown_icon.png";
 import { useGetContext } from "../../Context/ShopContext/ShopContext";
 import Swal from "sweetalert2";
 import { userData } from "../../State/home.slice";
 import { useSelector } from "react-redux";
 import MobileMenu from "../MobileMenu/MobileMenu";
+import { PreventBack } from "../../utils";
 
 const Navbar = () => {
   const { cartItems } = useSelector((state) => state.home);
@@ -29,6 +29,7 @@ const Navbar = () => {
   }, [location?.pathname]);
 
   const handleLogout = () => {
+    PreventBack();
     localStorage?.removeItem("token");
     localStorage?.removeItem("user");
     userData({});
@@ -75,7 +76,7 @@ const Navbar = () => {
               Logout
             </button>
             <div style={{ position: "relative" }}>
-              <Link to={"/cart"}>
+              <Link className="cart-container" to={"/cart"}>
                 <img src={cartIcon} alt="cart-icon" />
                 <div className="nav-cart-count">{cartItems?.totalCount}</div>
               </Link>

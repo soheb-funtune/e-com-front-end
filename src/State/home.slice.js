@@ -297,3 +297,22 @@ export const rzPaymentVarificationAPI = (IDs) => {
     }
   };
 };
+
+//  Send Email
+export const sendEmailTOUser = (email) => {
+  return async (dispatch) => {
+    try {
+      const { success, data, errors, message } = await services.sendEmailToUser(
+        email
+      );
+      console.log("email", data, errors);
+      if (data?.data || success) {
+      } else {
+        dispatch(error(errors || message));
+      }
+    } catch (err) {
+      dispatch(error("Something went wrong"));
+      console.error("Error", err);
+    }
+  };
+};

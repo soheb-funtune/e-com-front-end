@@ -6,6 +6,7 @@ import ListItem from "@mui/material/ListItem";
 import { TiThMenu } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
+import { AiOutlineMenu } from "react-icons/ai";
 
 export default function MobileMenu({ setMobileMenu, handleLogout }) {
   const [open, setOpen] = React.useState(false);
@@ -39,7 +40,7 @@ export default function MobileMenu({ setMobileMenu, handleLogout }) {
   return (
     <div>
       <StyledButton>
-        <TiThMenu onClick={toggleDrawer(true)} />
+        <AiOutlineMenu onClick={toggleDrawer(true)} />
       </StyledButton>
 
       <Drawer anchor={"right"} open={open} onClose={toggleDrawer(false)}>
@@ -73,6 +74,7 @@ const LogoutButton = styled.button`
 `;
 const StyledButton = styled.button`
   display: flex;
+  color: #33333;
   font-size: 30px;
   margin-left: 5px;
   border: none;

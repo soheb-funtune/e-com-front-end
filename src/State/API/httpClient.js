@@ -65,7 +65,7 @@ const httpClient = async (
   // process.env.REACT_APP_BROKER === "GRAM" ||
   // process.env.REACT_APP_BROKER === "UIB" &&
   //   !(options?.data instanceof FormData);
-
+  console.log({ options });
   if (options.queryParams) {
     const queryString = queryString.stringify(options.queryParams);
     fullPath = `${fullPath}?${queryString}`;
@@ -95,7 +95,7 @@ const httpClient = async (
     // timeout: process.env.REACT_APP_PROD === "YES" ? timeout : false,
   })
     .then((resp) => {
-      console.log({ resp });
+      console.log({ resp }, resp.data);
       let responseStringified = encryptionHeader
         ? DataDecrypt(resp?.data?.data)
         : resp;

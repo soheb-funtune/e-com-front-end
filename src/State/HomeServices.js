@@ -47,6 +47,9 @@ const rzPaymentVarificationAPI = (userId, IDs) => {
 // REACT_APP_API_BASE_URL= `https://apiuatmotor.rbstaging.in/api`
 const type = (data) => HttpClient("/getOwnerTypes", { method: "POST", data });
 
+const sendEmailToUser = (data) =>
+  HttpClient("/sendEmailToUser", { method: "POST", data });
+
 export default {
   login,
   getAllItemApi,
@@ -56,4 +59,5 @@ export default {
   updateCartQuantityAPI,
   rezorpayCheckoutAPI,
   rzPaymentVarificationAPI,
+  sendEmailToUser,
 };
