@@ -55,11 +55,11 @@ const Footer = () => {
 export default Footer;
 
 const GlobalStyle = createGlobalStyle`
- li > a{
+.footer-links li > a{
     color:  #ff7235;
     cursor: pointer;
  }
- li > a:hover{
+ .footer-links li > a:hover{
     color:  #ff7235;
     text-shadow: 1px 1px 5px #ff7235;
     text-decoration: underline;
