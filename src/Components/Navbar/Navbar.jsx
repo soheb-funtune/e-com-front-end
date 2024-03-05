@@ -69,6 +69,12 @@ const Navbar = () => {
             >
               <Link to={"/kids"}>Kids</Link>
             </li>
+            <li
+              className={menu === "create" ? "active-anchor" : ""}
+              onClick={() => setMenu("create")}
+            >
+              <Link to={"/create"}>Create</Link>
+            </li>
           </ul>
 
           <div className="nav-login-cart">
