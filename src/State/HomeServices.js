@@ -7,6 +7,10 @@ const login = (data) => {
 const getAllItemApi = () => {
   return HttpClient("/getItems", { method: "GET" });
 };
+// set SinglePost
+const setSinglePostApi = (data) => {
+  return HttpClient("/create", { method: "POST", data });
+};
 const getAllCartItemApi = (userId) => {
   return HttpClient(`/user/cart-items?user_id=${userId}`, {
     method: "GET",
@@ -54,6 +58,7 @@ export default {
   login,
   getAllItemApi,
   getAllCartItemApi,
+  setSinglePostApi,
   removeCartItemApi,
   addCartItemApi,
   updateCartQuantityAPI,

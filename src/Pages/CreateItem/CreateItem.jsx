@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import { Grid } from "@mui/material";
+import { createSinglePost } from "../../State/home.slice";
 const CreateItem = () => {
+  const dispatch = useDispatch();
   const [ImageItem, setImageItem] = useState();
   const [backendData, setBackendData] = useState();
   const handelSubmit = async (e) => {
@@ -22,14 +25,7 @@ const CreateItem = () => {
       formData.set("old_price", ImageItem?.old_price);
       formData.set("new_price", ImageItem?.new_price);
       formData.set("category", ImageItem?.category);
-      await axios
-        .post("http://localhost:4000/create", formData)
-        .then((res) => res.data)
-        .then((res) => {
-          alert("Submitted Successfylly !");
-          setBackendData(res);
-        })
-        .catch((err) => console.error(err));
+      dispatch(createSinglePost(formData));
     }
 
     console.log({ ImageItem });

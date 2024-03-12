@@ -155,6 +155,23 @@ export const LoginUser = (loginData) => {
   };
 };
 
+export const createSinglePost = (data) => {
+  return async (dispatch) => {
+    try {
+      actionStructure(
+        dispatch,
+        setAllItems,
+        error,
+        services.setSinglePostApi,
+        data
+      );
+    } catch (err) {
+      dispatch(error("Something went wrong"));
+      console.error("Error", err);
+    }
+  };
+};
+// get All posts
 export const getItems = () => {
   return async (dispatch) => {
     try {
